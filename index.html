@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minda Sihat — Penilaian &amp; Sokongan Psikologi</title>
+<style>
+  :root{
+    --bg:#f4f7fb; --card:#ffffff; --primary:#3a6ea5; --primary-dark:#274e75;
+    --accent:#5fb49c; --text:#1f2a37; --muted:#6b7785; --danger:#d9534f;
+    --warn:#e0a83a; --ok:#4caf7d; --border:#e2e8f0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:20px 16px;text-align:center;}
+  header h1{margin:0 0 4px;font-size:1.6rem;}
+  header p{margin:0;opacity:.9;font-size:.9rem;}
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:#fff;padding:10px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
+  nav button{border:none;background:var(--bg);color:var(--text);padding:9px 14px;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;}
+  nav button:hover{background:#e4ecf7;}
+  nav button.active{background:var(--primary);color:#fff;}
+  main{max-width:880px;margin:0 auto;padding:18px 14px 60px;}
+  section{display:none;}
+  section.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  h2{margin-top:0;color:var(--primary-dark);font-size:1.25rem;}
+  h3{color:var(--primary-dark);font-size:1.05rem;}
+  .muted{color:var(--muted);font-size:.88rem;}
+  .disclaimer{background:#fff6e6;border:1px solid var(--warn);color:#7a5a12;padding:10px 14px;border-radius:10px;font-size:.82rem;margin-bottom:16px;}
+  .crisis{background:#fdeceb;border:1px solid var(--danger);color:#8a2622;padding:12px 14px;border-radius:10px;font-size:.85rem;margin-top:12px;}
+  label.opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:.9rem;}
+  label.opt:hover{background:#f0f5fb;}
+  input[type=checkbox],input[type=radio]{accent-color:var(--primary);width:16px;height:16px;}
+  .question{margin-bottom:18px;}
+  .question p.qtext{font-weight:600;margin-bottom:8px;}
+  .btn{background:var(--primary);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer;}
+  .btn:hover{background:var(--primary-dark);}
+  .btn.secondary{background:#fff;color:var(--primary);border:1px solid var(--primary);}
+  .btn.secondary:hover{background:#eef4fb;}
+  .btn.danger{background:var(--danger);}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+  .test-card{border:1px solid var(--border);border-radius:12px;padding:14px;background:#fbfdff;}
+  .test-card h4{margin:0 0 6px;color:var(--primary-dark);}
+  .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;color:#fff;}
+  .badge.ok{background:var(--ok);} .badge.warn{background:var(--warn);} .badge.danger{background:var(--danger);}
+  .moodrow{display:flex;gap:10px;justify-content:space-between;margin-bottom:10px;}
+  .mood-emoji{font-size:1.8rem;padding:8px;border-radius:10px;cursor:pointer;border:2px solid transparent;flex:1;text-align:center;}
+  .mood-emoji.selected{border-color:var(--primary);background:#eef4fb;}
+  textarea,input[type=date],input[type=text]{width:100%;padding:9px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:10px;}
+  th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--border);}
+  .accordion-item{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;}
+  .accordion-head{padding:12px 14px;background:#fbfdff;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .accordion-body{padding:0 14px;max-height:0;overflow:hidden;transition:.25s;font-size:.88rem;color:var(--text);}
+  .accordion-item.open .accordion-body{padding:0 14px 14px;max-height:600px;}
+  .breath-circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--accent),var(--primary));margin:20px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;transition:transform 4s ease-in-out;transform:scale(.7);}
+  .result-box{padding:14px;border-radius:10px;margin-top:14px;}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:20px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧠 Minda Sihat</h1>
+  <p>Kenal pasti masalah, jalani saringan psikologi, jurnal mood &amp; sumber edukasi kesihatan mental</p>
+</header>
+
+<nav id="nav">
+  <button data-target="home" class="active">Utama</button>
+  <button data-target="triage">Kenal Pasti Masalah</button>
+  <button data-target="tests">Ujian Psikologi</button>
+  <button data-target="journal">Jurnal Mood</button>
+  <button data-target="edu">Edukasi</button>
+</nav>
+
+<main>
+
+  <div class="disclaimer">
+    ⚠️ Aplikasi ini adalah alat <strong>saringan kendiri</strong> dan bukan alat diagnostik klinikal. Hasilnya tidak menggantikan penilaian oleh pegawai psikologi/psikiatri bertauliah. Jika anda dalam krisis atau ada fikiran untuk menyakiti diri, sila hubungi <strong>Talian Kasih 15999</strong> atau <strong>Befrienders KL 03-76272929</strong> serta-merta.
+  </div>
+
+  <!-- HOME -->
+  <section id="home" class="active">
+    <div class="card">
+      <h2>Selamat datang 👋</h2>
+      <p>Aplikasi ini membantu anda:</p>
+      <ul>
+        <li><strong>Kenal Pasti Masalah</strong> — soalan ringkas untuk cadangkan ujian yang sesuai dengan apa yang anda alami.</li>
+        <li><strong>Ujian Psikologi</strong> — saringan tekanan, kecemasan, mood rendah &amp; harga diri dengan skor dan interpretasi.</li>
+        <li><strong>Jurnal Mood</strong> — rekod mood harian dan lihat trend dari semasa ke semasa.</li>
+        <li><strong>Edukasi</strong> — panduan praktikal mengurus tekanan, kecemasan, tidur dan bila perlu jumpa profesional.</li>
+      </ul>
+      <button class="btn" onclick="goTo('triage')">Mula dengan Kenal Pasti Masalah →</button>
+    </div>
+  </section>
+
+  <!-- TRIAGE -->
+  <section id="triage">
+    <div class="card">
+      <h2>Kenal Pasti Masalah</h2>
+      <p class="muted">Tandakan apa yang anda rasa kebelakangan ini (2 minggu lepas). Boleh pilih lebih dari satu.</p>
+      <div id="triageForm"></div>
+      <button class="btn" onclick="evaluateTriage()">Cadangkan Ujian</button>
+      <div id="triageResult"></div>
+    </div>
+  </section>
+
+  <!-- TESTS -->
+  <section id="tests">
+    <div class="card">
+      <h2>Ujian Psikologi</h2>
+      <p class="muted">Pilih satu saringan untuk dimulakan. Jawab mengikut perasaan anda dalam 2 minggu kebelakangan.</p>
+      <div class="grid" id="testList"></div>
+    </div>
+    <div class="card" id="testRunner" style="display:none;"></div>
+  </section>
+
+  <!-- JOURNAL -->
+  <section id="journal">
+    <div class="card">
+      <h2>Jurnal Mood</h2>
+      <label class="muted">Tarikh</label>
+      <input type="date" id="journalDate">
+      <div style="height:10px;"></div>
+      <label class="muted">Mood hari ini</label>
+      <div class="moodrow" id="moodPicker"></div>
+      <label class="muted">Nota (apa yang berlaku / apa yang dirasakan)</label>
+      <textarea id="journalNote" rows="3" placeholder="Contoh: Hari ini agak penat di tempat kerja tetapi sempat berjalan petang..."></textarea>
+      <div style="height:10px;"></div>
+      <button class="btn" onclick="saveJournal()">Simpan Entri</button>
+      <span id="journalSaveMsg" class="muted"></span>
+    </div>
+    <div class="card">
+      <h3>Trend Mood (14 entri terakhir)</h3>
+      <canvas id="moodChart" width="800" height="200" style="width:100%;max-width:800px;height:200px;"></canvas>
+    </div>
+    <div class="card">
+      <h3>Sejarah Entri</h3>
+      <table id="journalTable"><thead><tr><th>Tarikh</th><th>Mood</th><th>Nota</th><th></th></tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <!-- EDU -->
+  <section id="edu">
+    <div class="card">
+      <h2>Edukasi &amp; Self-Care</h2>
+      <div id="accordionWrap"></div>
+    </div>
+    <div class="card">
+      <h3>🌬️ Latihan Pernafasan Ringkas</h3>
+      <p class="muted">Teknik 4-4-6: tarik nafas 4 saat, tahan 4 saat, lepas nafas 6 saat. Ulang 5 kali.</p>
+      <div class="breath-circle" id="breathCircle">Mula</div>
+      <div style="text-align:center;">
+        <button class="btn secondary" onclick="startBreathing()">Mula Latihan</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Minda Sihat • Data disimpan secara tempatan di peranti anda sahaja (localStorage), tidak dihantar ke mana-mana pelayan.</footer>
+
+<script>
+/* ---------- Navigation ---------- */
+function goTo(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+  if(id==='journal') renderJournal();
+}
+document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.target)));
+
+/* ---------- Triage ---------- */
+const triageItems = [
+  {key:'sleep', label:'Sukar tidur, kerap terjaga malam, atau tidur tidak memuaskan'},
+  {key:'sad', label:'Rasa sedih, hilang minat/keseronokan dalam aktiviti harian'},
+  {key:'anxious', label:'Rasa risau/cemas berlebihan yang sukar dikawal'},
+  {key:'stress', label:'Rasa tertekan dengan kerja/tugasan, mudah marah atau letih'},
+  {key:'selfesteem', label:'Rasa rendah diri, tidak yakin, atau kerap membandingkan diri secara negatif'},
+  {key:'social', label:'Mengelak daripada bersosial atau berjumpa orang lain'},
+  {key:'concentration', label:'Sukar fokus / membuat keputusan'},
+];
+const triageForm = document.getElementById('triageForm');
+triageItems.forEach(item=>{
+  const lab = document.createElement('label');
+  lab.className='opt';
+  lab.innerHTML = `<input type="checkbox" value="${item.key}"> ${item.label}`;
+  triageForm.appendChild(lab);
+});
+
+const triageToTest = {
+  sleep:'stress', sad:'depression', anxious:'anxiety', stress:'stress',
+  selfesteem:'selfesteem', social:'anxiety', concentration:'stress'
+};
+
+function evaluateTriage(){
+  const checked = Array.from(triageForm.querySelectorAll('input:checked')).map(i=>i.value);
+  const resultEl = document.getElementById('triageResult');
+  if(checked.length===0){
+    resultEl.innerHTML = '<p class="muted">Sila tandakan sekurang-kurangnya satu perkara di atas.</p>';
+    return;
+  }
+  const counts = {};
+  checked.forEach(k=>{
+    const t = triageToTest[k];
+    counts[t] = (counts[t]||0)+1;
+  });
+  const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+  const names = {stress:'Saringan Tekanan', depression:'Saringan Mood Rendah / Kemurungan', anxiety:'Saringan Kecemasan', selfesteem:'Saringan Harga Diri'};
+  resultEl.innerHTML = `
+    <div class="result-box" style="background:#eef4fb;">
+      <p>Berdasarkan jawapan anda, kami cadangkan anda cuba ujian berikut:</p>
+      <ol>${sorted.map(t=>`<li><strong>${names[t]}</strong> <button class="btn secondary" style="margin-left:8px;padding:4px 10px;font-size:.78rem;" onclick="goTo('tests');startTest('${t}')">Mula</button></li>`).join('')}</ol>
+    </div>`;
+}
+
+/* ---------- Tests ---------- */
+const tests = {
+  stress: {
+    name:'Saringan Tekanan',
+    desc:'10 soalan tentang tahap tekanan anda dalam 2 minggu lepas.',
+    options:[{l:'Tidak pernah',v:0},{l:'Kadang-kadang',v:1},{l:'Selalu',v:2},{l:'Hampir setiap hari',v:3}],
+    items:[
+      'Saya rasa tertekan dengan tugasan/kerja harian',
+      'Saya sukar untuk bertenang',
+      'Saya mudah marah atau cepat naik angin',
+      'Saya rasa keletihan walaupun selepas berehat',
+      'Saya sukar untuk fokus disebabkan terlalu banyak fikiran',
+      'Saya rasa terbeban dengan tanggungjawab saya',
+      'Saya rasa otot tegang (leher/bahu/kepala) tanpa sebab fizikal',
+      'Saya rasa tidak dapat mengawal perkara penting dalam hidup saya',
+      'Saya rasa cepat terganggu dengan perkara kecil',
+      'Saya rasa sukar untuk berehat sepenuhnya',
+    ],
+    interpret(score){
+      if(score<=9) return {level:'ok', label:'Tekanan Rendah', text:'Tahap tekanan anda kelihatan rendah. Teruskan amalan self-care yang baik.'};
+      if(score<=19) return {level:'warn', label:'Tekanan Sederhana', text:'Anda mengalami tekanan sederhana. Cuba teknik pernafasan dan urus masa dengan lebih baik. Lihat bahagian Edukasi.'};
+      return {level:'danger', label:'Tekanan Tinggi', text:'Tahap tekanan anda tinggi. Sangat disyorkan untuk berkongsi dengan rakan/keluarga yang dipercayai dan dapatkan bantuan profesional (kaunselor/psikologi).'};
+    }
+  },
+  anxiety: {
+    name:'Saringan Kecemasan',
+    desc:'7 soalan tentang perasaan risau/cemas dalam 2 minggu lepas.',
+    options:[{l:'Tidak pernah',v:0},{l:'Beberapa hari',v:1},{l:'Lebih separuh hari',v:2},{l:'Hampir setiap hari',v:3}],
+    items:[
+      'Rasa gelisah, cemas atau tegang',
+      'Tidak dapat berhenti atau mengawal risau',
+      'Terlalu risau tentang pelbagai perkara',
+      'Sukar untuk bertenang',
+      'Sangat gelisah sehingga sukar untuk duduk diam',
+      'Mudah rasa kecut/terkejut atau bimbang sesuatu buruk akan berlaku',
+      'Rasa tidak senang/cemas yang menjejaskan tumpuan',
+    ],
+    interpret(score){
+      if(score<=4) return {level:'ok', label:'Kecemasan Minima', text:'Tahap kecemasan anda minima.'};
+      if(score<=9) return {level:'warn', label:'Kecemasan Ringan', text:'Kecemasan ringan dikesan. Latihan pernafasan dan rehat yang cukup boleh membantu.'};
+      if(score<=14) return {level:'warn', label:'Kecemasan Sederhana', text:'Kecemasan sederhana. Pertimbangkan untuk berbincang dengan kaunselor.'};
+      return {level:'danger', label:'Kecemasan Tinggi', text:'Tahap kecemasan tinggi. Disyorkan kuat untuk mendapatkan bantuan profesional kesihatan mental.'};
+    }
+  },
+  depression: {
+    name:'Saringan Mood Rendah',
+    desc:'9 soalan tentang mood dan minat anda dalam 2 minggu lepas.',
+    options:[{l:'Tidak pernah',v:0},{l:'Beberapa hari',v:1},{l:'Lebih separuh hari',v:2},{l:'Hampir setiap hari',v:3}],
+    items:[
+      'Kurang minat atau keseronokan dalam melakukan sesuatu',
+      'Rasa sedih, murung atau berputus asa',
+      'Sukar tidur, atau tidur berlebihan',
+      'Rasa letih atau kurang tenaga',
+      'Selera makan berkurang atau makan berlebihan',
+      'Rasa diri tidak berguna atau mengecewakan diri/keluarga',
+      'Sukar fokus (contoh: membaca, menonton TV)',
+      'Bergerak/bercakap perlahan, atau sebaliknya resah & tidak boleh duduk diam',
+      'Terfikir bahawa lebih baik tiada di dunia, atau fikiran menyakiti diri',
+    ],
+    interpret(score){
+      let base;
+      if(score<=4) base={level:'ok', label:'Minima', text:'Mood anda kelihatan stabil.'};
+      else if(score<=9) base={level:'warn', label:'Ringan', text:'Tanda mood rendah ringan. Cuba kekal aktif dan berhubung dengan orang yang disayangi.'};
+      else if(score<=14) base={level:'warn', label:'Sederhana', text:'Tanda mood rendah sederhana. Disyorkan berjumpa kaunselor/pegawai psikologi.'};
+      else base={level:'danger', label:'Teruk', text:'Tanda mood rendah yang serius dikesan. Sangat disyorkan untuk mendapatkan bantuan profesional secepat mungkin.'};
+      return base;
+    },
+    crisisItemIndex:8
+  },
+  selfesteem: {
+    name:'Saringan Harga Diri',
+    desc:'10 soalan tentang pandangan anda terhadap diri sendiri.',
+    options:[{l:'Sangat tidak setuju',v:0},{l:'Tidak setuju',v:1},{l:'Setuju',v:2},{l:'Sangat setuju',v:3}],
+    items:[
+      'Secara keseluruhan, saya berpuas hati dengan diri saya',
+      'Saya rasa saya mempunyai beberapa kualiti yang baik',
+      'Saya rasa saya tidak mampu berbuat apa-apa dengan baik',
+      'Saya boleh melakukan sesuatu sama baik dengan orang lain',
+      'Saya rasa saya tidak mempunyai banyak perkara untuk dibanggakan',
+      'Saya mempunyai sikap positif terhadap diri saya',
+      'Secara umum, saya berpuas hati dengan diri saya',
+      'Saya berharap saya boleh lebih menghormati diri saya',
+      'Saya kadangkala rasa saya tidak berguna',
+      'Saya kadangkala berfikir saya tidak baik langsung',
+    ],
+    reversed:[2,4,7,8,9],
+    interpret(score){
+      if(score>=20) return {level:'ok', label:'Harga Diri Tinggi', text:'Anda mempunyai pandangan positif yang sihat terhadap diri sendiri.'};
+      if(score>=12) return {level:'warn', label:'Harga Diri Sederhana', text:'Harga diri sederhana. Amalan self-compassion dan rekod kejayaan kecil boleh membantu.'};
+      return {level:'danger', label:'Harga Diri Rendah', text:'Harga diri rendah dikesan. Pertimbangkan untuk berbincang dengan kaunselor mengenai ini.'};
+    }
+  }
+};
+
+const testList = document.getElementById('testList');
+Object.entries(tests).forEach(([key,t])=>{
+  const div = document.createElement('div');
+  div.className='test-card';
+  div.innerHTML = `<h4>${t.name}</h4><p class="muted">${t.desc}</p><button class="btn secondary" onclick="startTest('${key}')">Mula Ujian</button>`;
+  testList.appendChild(div);
+});
+
+function startTest(key){
+  const t = tests[key];
+  const runner = document.getElementById('testRunner');
+  runner.style.display='block';
+  let html = `<h3>${t.name}</h3>`;
+  t.items.forEach((q,i)=>{
+    html += `<div class="question"><p class="qtext">${i+1}. ${q}</p>`;
+    t.options.forEach((o,oi)=>{
+      html += `<label class="opt"><input type="radio" name="q${i}" value="${o.v}"> ${o.l}</label>`;
+    });
+    html += `</div>`;
+  });
+  html += `<button class="btn" onclick="submitTest('${key}')">Hantar Jawapan</button><div id="testResultBox"></div>`;
+  runner.innerHTML = html;
+  runner.scrollIntoView({behavior:'smooth'});
+}
+
+function submitTest(key){
+  const t = tests[key];
+  let total=0, answeredAll=true, crisisFlag=false;
+  t.items.forEach((q,i)=>{
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if(!sel){ answeredAll=false; return; }
+    let v = parseInt(sel.value,10);
+    if(t.reversed && t.reversed.includes(i)) v = 3-v;
+    total += v;
+    if(t.crisisItemIndex===i && v>0) crisisFlag=true;
+  });
+  if(!answeredAll){
+    alert('Sila jawab semua soalan sebelum hantar.');
+    return;
+  }
+  const r = t.interpret(total);
+  let html = `<div class="result-box" style="background:${r.level==='ok'?'#eafaf1':r.level==='warn'?'#fff6e6':'#fdeceb'};">
+    <p>Skor anda: <strong>${total}</strong></p>
+    <p><span class="badge ${r.level}">${r.label}</span></p>
+    <p>${r.text}</p>
+  </div>`;
+  if(crisisFlag){
+    html += `<div class="crisis">🚨 Anda menandakan fikiran untuk menyakiti diri. Sila hubungi <strong>Talian Kasih 15999</strong> atau <strong>Befrienders KL 03-76272929</strong> SEKARANG, atau berjumpa pegawai kesihatan/keluarga terdekat.</div>`;
+  }
+  html += `<p style="margin-top:10px;"><button class="btn secondary" onclick="goTo('edu')">Lihat Sumber Self-Care</button></p>`;
+  document.getElementById('testResultBox').innerHTML = html;
+  document.getElementById('testResultBox').scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------- Journal ---------- */
+const MOOD_OPTIONS = [
+  {v:1,e:'😢',l:'Sangat sedih'},
+  {v:2,e:'😟',l:'Sedih'},
+  {v:3,e:'😐',l:'Biasa'},
+  {v:4,e:'🙂',l:'Baik'},
+  {v:5,e:'😄',l:'Sangat baik'},
+];
+let selectedMood = null;
+const moodPicker = document.getElementById('moodPicker');
+MOOD_OPTIONS.forEach(m=>{
+  const div = document.createElement('div');
+  div.className='mood-emoji';
+  div.innerHTML = `${m.e}<br><span style="font-size:.65rem;">${m.l}</span>`;
+  div.onclick = ()=>{
+    selectedMood = m.v;
+    Array.from(moodPicker.children).forEach(c=>c.classList.remove('selected'));
+    div.classList.add('selected');
+  };
+  moodPicker.appendChild(div);
+});
+document.getElementById('journalDate').valueAsDate = new Date();
+
+function getJournal(){
+  return JSON.parse(localStorage.getItem('mindasihat_journal')||'[]');
+}
+function setJournal(arr){
+  localStorage.setItem('mindasihat_journal', JSON.stringify(arr));
+}
+function saveJournal(){
+  const date = document.getElementById('journalDate').value;
+  const note = document.getElementById('journalNote').value.trim();
+  const msg = document.getElementById('journalSaveMsg');
+  if(!date || !selectedMood){
+    msg.textContent = 'Sila pilih tarikh dan mood.';
+    return;
+  }
+  const arr = getJournal();
+  arr.push({date, mood:selectedMood, note});
+  arr.sort((a,b)=> a.date.localeCompare(b.date));
+  setJournal(arr);
+  msg.textContent = 'Entri disimpan!';
+  document.getElementById('journalNote').value='';
+  renderJournal();
+  setTimeout(()=>msg.textContent='',2000);
+}
+function deleteEntry(idx){
+  const arr = getJournal();
+  arr.splice(idx,1);
+  setJournal(arr);
+  renderJournal();
+}
+function renderJournal(){
+  const arr = getJournal();
+  const tbody = document.querySelector('#journalTable tbody');
+  tbody.innerHTML='';
+  arr.slice().reverse().forEach((e)=>{
+    const realIdx = arr.indexOf(e);
+    const tr = document.createElement('tr');
+    const moodObj = MOOD_OPTIONS.find(m=>m.v===e.mood);
+    tr.innerHTML = `<td>${e.date}</td><td>${moodObj?moodObj.e:''}</td><td>${e.note||''}</td><td><button class="btn danger" style="padding:3px 8px;font-size:.75rem;" onclick="deleteEntry(${realIdx})">Padam</button></td>`;
+    tbody.appendChild(tr);
+  });
+  drawMoodChart(arr.slice(-14));
+}
+function drawMoodChart(data){
+  const canvas = document.getElementById('moodChart');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0,0,w,h);
+  if(data.length===0){
+    ctx.fillStyle='#9aa5b1'; ctx.font='14px sans-serif';
+    ctx.fillText('Tiada data lagi. Mula simpan entri jurnal anda.', 10, h/2);
+    return;
+  }
+  const pad=30;
+  const stepX = (w-2*pad)/Math.max(data.length-1,1);
+  ctx.strokeStyle='#e2e8f0';
+  ctx.beginPath();
+  for(let yv=1;yv<=5;yv++){
+    const y = h-pad-( (yv-1)/4 )*(h-2*pad);
+    ctx.moveTo(pad,y); ctx.lineTo(w-pad,y);
+  }
+  ctx.stroke();
+  ctx.strokeStyle='#3a6ea5'; ctx.lineWidth=2;
+  ctx.beginPath();
+  data.forEach((e,i)=>{
+    const x = pad+i*stepX;
+    const y = h-pad-((e.mood-1)/4)*(h-2*pad);
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  ctx.fillStyle='#3a6ea5';
+  data.forEach((e,i)=>{
+    const x = pad+i*stepX;
+    const y = h-pad-((e.mood-1)/4)*(h-2*pad);
+    ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
+  });
+  ctx.fillStyle='#6b7785'; ctx.font='10px sans-serif';
+  data.forEach((e,i)=>{
+    const x = pad+i*stepX;
+    ctx.fillText(e.date.slice(5), x-14, h-8);
+  });
+}
+renderJournal();
+
+/* ---------- Education accordion ---------- */
+const eduTopics = [
+  {title:'😌 Pengurusan Tekanan', body:'Kenal pasti punca tekanan anda dan bahagikan masalah besar kepada langkah kecil. Luangkan masa rehat yang tetap, bersenam ringan 20-30 minit sehari, dan elakkan kafein berlebihan. Cuba teknik "time-boxing" untuk mengurus tugasan supaya tidak terasa keterlaluan.'},
+  {title:'🌬️ Mengurus Kecemasan', body:'Gunakan teknik grounding 5-4-3-2-1 (kenal pasti 5 benda dilihat, 4 didengar, 3 disentuh, 2 dihidu, 1 dirasa) untuk kembali ke masa kini. Hadkan pendedahan kepada berita/media sosial yang menambah risau. Latihan pernafasan dalam membantu menenangkan sistem saraf.'},
+  {title:'🛏️ Higiene Tidur', body:'Tetapkan waktu tidur & bangun yang konsisten setiap hari. Elakkan skrin (telefon/laptop) 30-60 minit sebelum tidur. Jadikan bilik tidur sejuk, gelap dan senyap. Elakkan kafein selepas tengah hari.'},
+  {title:'💬 Self-Compassion &amp; Harga Diri', body:'Layan diri sendiri seperti anda melayan kawan baik — tanpa menghukum diri secara keterlaluan. Catat 3 kejayaan kecil setiap hari dalam jurnal mood anda. Elakkan membandingkan diri secara negatif dengan orang lain di media sosial.'},
+  {title:'🧑‍⚕️ Bila Perlu Jumpa Profesional', body:'Jika perasaan sedih/risau/tertekan berlarutan lebih 2 minggu, menjejaskan kerja/sekolah/hubungan, atau anda ada fikiran menyakiti diri — segera berjumpa pegawai psikologi, kaunselor atau pegawai perubatan. Di Malaysia, anda boleh hubungi Talian Kasih 15999 atau Befrienders KL 03-76272929 untuk sokongan segera.'},
+];
+const accWrap = document.getElementById('accordionWrap');
+eduTopics.forEach(t=>{
+  const item = document.createElement('div');
+  item.className='accordion-item';
+  item.innerHTML = `<div class="accordion-head">${t.title}<span>+</span></div><div class="accordion-body"><p>${t.body}</p></div>`;
+  item.querySelector('.accordion-head').onclick = ()=>item.classList.toggle('open');
+  accWrap.appendChild(item);
+});
+
+/* ---------- Breathing exercise ---------- */
+let breathing=false;
+function startBreathing(){
+  if(breathing) return;
+  breathing=true;
+  const circle = document.getElementById('breathCircle');
+  let cycle=0;
+  const totalCycles=5;
+  function step(){
+    if(cycle>=totalCycles){ circle.textContent='Selesai'; circle.style.transform='scale(.7)'; breathing=false; return; }
+    circle.textContent='Tarik Nafas'; circle.style.transition='transform 4s ease-in-out'; circle.style.transform='scale(1.15)';
+    setTimeout(()=>{
+      circle.textContent='Tahan';
+      setTimeout(()=>{
+        circle.textContent='Lepas Nafas'; circle.style.transition='transform 6s ease-in-out'; circle.style.transform='scale(.7)';
+        setTimeout(()=>{ cycle++; step(); }, 6000);
+      }, 4000);
+    }, 4000);
+  }
+  step();
+}
+</script>
+</body>
+</html>
