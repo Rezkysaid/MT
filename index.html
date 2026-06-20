@@ -7,8 +7,8 @@
 <style>
   :root{
     --bg:#f4f7fb; --card:#ffffff; --primary:#3a6ea5; --primary-dark:#274e75;
-    --accent:#5fb49c; --text:#1f2a37; --muted:#6b7785; --danger:#d9534f;
-    --warn:#e0a83a; --ok:#4caf7d; --border:#e2e8f0;
+    --accent:#5fb49c; --text:#1f2a37; --muted:#6b7785; --danger:#c92a2a;
+    --warn:#e0a83a; --ok:#1a7f37; --border:#e2e8f0;
   }
   *{box-sizing:border-box;}
   body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);}
@@ -16,7 +16,7 @@
   header h1{margin:0 0 4px;font-size:1.6rem;}
   header p{margin:0;opacity:.9;font-size:.9rem;}
   nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:#fff;padding:10px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
-  nav button{border:none;background:var(--bg);color:var(--text);padding:9px 14px;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;}
+  nav button{border:none;background:var(--bg);color:var(--text);padding:9px 14px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;}
   nav button:hover{background:#e4ecf7;}
   nav button.active{background:var(--primary);color:#fff;}
   main{max-width:880px;margin:0 auto;padding:18px 14px 60px;}
@@ -34,7 +34,7 @@
   input[type=checkbox],input[type=radio]{accent-color:var(--primary);width:16px;height:16px;}
   .question{margin-bottom:18px;}
   .question p.qtext{font-weight:600;margin-bottom:8px;}
-  .btn{background:var(--primary);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer;}
+  .btn{background:var(--primary);color:#fff;border:none;padding:10px 18px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer;}
   .btn:hover{background:var(--primary-dark);}
   .btn.secondary{background:#fff;color:var(--primary);border:1px solid var(--primary);}
   .btn.secondary:hover{background:#eef4fb;}
@@ -43,15 +43,17 @@
   .test-card{border:1px solid var(--border);border-radius:12px;padding:14px;background:#fbfdff;}
   .test-card h4{margin:0 0 6px;color:var(--primary-dark);}
   .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;color:#fff;}
-  .badge.ok{background:var(--ok);} .badge.warn{background:var(--warn);} .badge.danger{background:var(--danger);}
+  .badge.ok{background:var(--ok);} .badge.warn{background:var(--warn);color:var(--text);} .badge.danger{background:var(--danger);}
   .moodrow{display:flex;gap:10px;justify-content:space-between;margin-bottom:10px;}
-  .mood-emoji{font-size:1.8rem;padding:8px;border-radius:10px;cursor:pointer;border:2px solid transparent;flex:1;text-align:center;}
+  .mood-emoji{font-size:1.8rem;padding:8px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;border:2px solid transparent;flex:1;text-align:center;}
   .mood-emoji.selected{border-color:var(--primary);background:#eef4fb;}
   textarea,input[type=date],input[type=text]{width:100%;padding:9px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;}
   table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:10px;}
   th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--border);}
   .accordion-item{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;}
-  .accordion-head{padding:12px 14px;background:#fbfdff;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .accordion-head{padding:12px 14px;min-height:44px;background:#fbfdff;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  nav button:focus-visible,.btn:focus-visible,.mood-emoji:focus-visible,.accordion-head:focus-visible{outline:2px solid var(--primary-dark);outline-offset:2px;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   .accordion-body{padding:0 14px;max-height:0;overflow:hidden;transition:.25s;font-size:.88rem;color:var(--text);}
   .accordion-item.open .accordion-body{padding:0 14px 14px;max-height:600px;}
   .breath-circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--accent),var(--primary));margin:20px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;transition:transform 4s ease-in-out;transform:scale(.7);}
@@ -133,7 +135,7 @@
     </div>
     <div class="card">
       <h3>Trend Mood (14 entri terakhir)</h3>
-      <canvas id="moodChart" width="800" height="200" style="width:100%;max-width:800px;height:200px;"></canvas>
+      <canvas id="moodChart" width="800" height="200" style="width:100%;max-width:800px;height:200px;" role="img" aria-label="Graf trend mood 14 entri terakhir. Data penuh tersedia dalam jadual Sejarah Entri di bawah."></canvas>
     </div>
     <div class="card">
       <h3>Sejarah Entri</h3>
@@ -373,14 +375,28 @@ const MOOD_OPTIONS = [
 ];
 let selectedMood = null;
 const moodPicker = document.getElementById('moodPicker');
+moodPicker.setAttribute('role','radiogroup');
+moodPicker.setAttribute('aria-label','Pilih mood hari ini');
 MOOD_OPTIONS.forEach(m=>{
   const div = document.createElement('div');
   div.className='mood-emoji';
-  div.innerHTML = `${m.e}<br><span style="font-size:.65rem;">${m.l}</span>`;
-  div.onclick = ()=>{
+  div.tabIndex = 0;
+  div.setAttribute('role','radio');
+  div.setAttribute('aria-checked','false');
+  div.setAttribute('aria-label', m.l);
+  div.innerHTML = `${m.e}<br><span style="font-size:.72rem;">${m.l}</span>`;
+  const select = ()=>{
     selectedMood = m.v;
-    Array.from(moodPicker.children).forEach(c=>c.classList.remove('selected'));
+    Array.from(moodPicker.children).forEach(c=>{
+      c.classList.remove('selected');
+      c.setAttribute('aria-checked','false');
+    });
     div.classList.add('selected');
+    div.setAttribute('aria-checked','true');
+  };
+  div.onclick = select;
+  div.onkeydown = (e)=>{
+    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); select(); }
   };
   moodPicker.appendChild(div);
 });
@@ -481,8 +497,16 @@ const accWrap = document.getElementById('accordionWrap');
 eduTopics.forEach(t=>{
   const item = document.createElement('div');
   item.className='accordion-item';
-  item.innerHTML = `<div class="accordion-head">${t.title}<span>+</span></div><div class="accordion-body"><p>${t.body}</p></div>`;
-  item.querySelector('.accordion-head').onclick = ()=>item.classList.toggle('open');
+  item.innerHTML = `<div class="accordion-head" tabindex="0" role="button" aria-expanded="false">${t.title}<span>+</span></div><div class="accordion-body"><p>${t.body}</p></div>`;
+  const head = item.querySelector('.accordion-head');
+  const toggle = ()=>{
+    const open = item.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  head.onclick = toggle;
+  head.onkeydown = (e)=>{
+    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
+  };
   accWrap.appendChild(item);
 });
 
