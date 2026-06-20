@@ -6,59 +6,65 @@
 <title>Minda Sihat — Penilaian &amp; Sokongan Psikologi</title>
 <style>
   :root{
-    --bg:#f4f7fb; --card:#ffffff; --primary:#3a6ea5; --primary-dark:#274e75;
-    --accent:#5fb49c; --text:#1f2a37; --muted:#6b7785; --danger:#c92a2a;
-    --warn:#e0a83a; --ok:#1a7f37; --border:#e2e8f0;
+    --bg:#f7f4ed; --card:#fffdf9; --primary:#3d6b5c; --primary-dark:#274539;
+    --accent:#c97b4a; --text:#2b2925; --muted:#736b5e; --danger:#a13d2e;
+    --warn:#8a5a1f; --warn-bg:#f3e6cf; --ok:#2f6b4f; --border:#e6e0d3;
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px;
   }
   *{box-sizing:border-box;}
-  body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);}
-  header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:20px 16px;text-align:center;}
-  header h1{margin:0 0 4px;font-size:1.6rem;}
-  header p{margin:0;opacity:.9;font-size:.9rem;}
-  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:#fff;padding:10px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
-  nav button{border:none;background:var(--bg);color:var(--text);padding:9px 14px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;}
-  nav button:hover{background:#e4ecf7;}
-  nav button.active{background:var(--primary);color:#fff;}
-  main{max-width:880px;margin:0 auto;padding:18px 14px 60px;}
+  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  h1,h2,h3,h4{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;letter-spacing:-.01em;}
+  header{background:linear-gradient(160deg,var(--primary),var(--primary-dark));color:#fff;padding:32px 16px 28px;text-align:center;}
+  header h1{margin:0 0 6px;font-size:1.85rem;font-weight:600;}
+  header p{margin:0 auto;max-width:480px;opacity:.92;font-size:.92rem;}
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-2);background:var(--card);padding:var(--space-3);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
+  nav button{border:1px solid var(--border);background:transparent;color:var(--text);padding:9px 16px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s ease-out;}
+  nav button:hover{border-color:var(--primary);color:var(--primary-dark);}
+  nav button.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+  main{max-width:880px;margin:0 auto;padding:var(--space-5) 14px 60px;}
   section{display:none;}
-  section.active{display:block;animation:fade .25s ease;}
-  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
-  h2{margin-top:0;color:var(--primary-dark);font-size:1.25rem;}
-  h3{color:var(--primary-dark);font-size:1.05rem;}
+  section.active{display:block;animation:fade .3s cubic-bezier(.22,1,.36,1);}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 26px;margin-bottom:var(--space-4);box-shadow:0 1px 2px rgba(43,41,37,.04);}
+  h2{margin-top:0;color:var(--primary-dark);font-size:1.3rem;}
+  h3{color:var(--primary-dark);font-size:1.08rem;}
   .muted{color:var(--muted);font-size:.88rem;}
-  .disclaimer{background:#fff6e6;border:1px solid var(--warn);color:#7a5a12;padding:10px 14px;border-radius:10px;font-size:.82rem;margin-bottom:16px;}
-  .crisis{background:#fdeceb;border:1px solid var(--danger);color:#8a2622;padding:12px 14px;border-radius:10px;font-size:.85rem;margin-top:12px;}
-  label.opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:.9rem;}
-  label.opt:hover{background:#f0f5fb;}
-  input[type=checkbox],input[type=radio]{accent-color:var(--primary);width:16px;height:16px;}
-  .question{margin-bottom:18px;}
-  .question p.qtext{font-weight:600;margin-bottom:8px;}
-  .btn{background:var(--primary);color:#fff;border:none;padding:10px 18px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer;}
+  .disclaimer{background:var(--warn-bg);border-left:3px solid var(--warn);color:#5e3f15;padding:12px 16px;border-radius:8px;font-size:.85rem;margin-bottom:var(--space-5);}
+  .crisis{background:#f7e7e3;border-left:3px solid var(--danger);color:#6d2c20;padding:14px 16px;border-radius:8px;font-size:.88rem;margin-top:var(--space-3);}
+  label.opt{display:flex;align-items:center;gap:var(--space-2);padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:var(--space-2);cursor:pointer;font-size:.9rem;transition:.15s ease-out;}
+  label.opt:hover{background:#f1ede2;border-color:var(--primary);}
+  input[type=checkbox],input[type=radio]{accent-color:var(--primary);width:17px;height:17px;}
+  .question{margin-bottom:var(--space-5);}
+  .question p.qtext{font-weight:600;margin-bottom:var(--space-2);}
+  .btn{background:var(--primary);color:#fff;border:none;padding:10px 20px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;font-size:.92rem;font-weight:600;cursor:pointer;transition:.15s ease-out;}
   .btn:hover{background:var(--primary-dark);}
-  .btn.secondary{background:#fff;color:var(--primary);border:1px solid var(--primary);}
-  .btn.secondary:hover{background:#eef4fb;}
+  .btn.secondary{background:transparent;color:var(--primary-dark);border:1px solid var(--primary);}
+  .btn.secondary:hover{background:#eef2ec;}
   .btn.danger{background:var(--danger);}
-  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-  .test-card{border:1px solid var(--border);border-radius:12px;padding:14px;background:#fbfdff;}
-  .test-card h4{margin:0 0 6px;color:var(--primary-dark);}
-  .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;color:#fff;}
-  .badge.ok{background:var(--ok);} .badge.warn{background:var(--warn);color:var(--text);} .badge.danger{background:var(--danger);}
-  .moodrow{display:flex;gap:10px;justify-content:space-between;margin-bottom:10px;}
-  .mood-emoji{font-size:1.8rem;padding:8px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;border:2px solid transparent;flex:1;text-align:center;}
-  .mood-emoji.selected{border-color:var(--primary);background:#eef4fb;}
-  textarea,input[type=date],input[type=text]{width:100%;padding:9px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;}
-  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:10px;}
-  th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--border);}
-  .accordion-item{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;}
-  .accordion-head{padding:12px 14px;min-height:44px;background:#fbfdff;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .grid{display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+  .test-card{border:1px solid var(--border);border-radius:14px;padding:var(--space-4);background:var(--bg);}
+  .test-card h4{margin:0 0 6px;color:var(--primary-dark);font-family:Georgia,serif;}
+  .badge{display:inline-block;padding:4px 12px;border-radius:12px;font-size:.75rem;font-weight:700;color:#fff;}
+  .badge.ok{background:var(--ok);} .badge.warn{background:var(--warn);color:#fff;} .badge.danger{background:var(--danger);}
+  .moodrow{display:flex;gap:var(--space-2);justify-content:space-between;margin-bottom:var(--space-3);}
+  .mood-emoji{font-size:1.8rem;padding:var(--space-2);min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:12px;cursor:pointer;border:2px solid var(--border);flex:1;text-align:center;transition:.15s ease-out;}
+  .mood-emoji:hover{border-color:var(--primary);transform:translateY(-2px);}
+  .mood-emoji.selected{border-color:var(--primary);background:#eef2ec;}
+  textarea,input[type=date],input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:.9rem;font-family:inherit;background:#fff;}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:var(--space-3);}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border);}
+  th{font-family:Georgia,serif;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;}
+  .accordion-item{border:1px solid var(--border);border-radius:12px;margin-bottom:var(--space-2);overflow:hidden;}
+  .accordion-head{padding:14px 16px;min-height:44px;background:var(--card);cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;transition:.15s ease-out;}
+  .accordion-head:hover{background:#f1ede2;}
+  .accordion-item.open .accordion-head{color:var(--primary-dark);}
   nav button:focus-visible,.btn:focus-visible,.mood-emoji:focus-visible,.accordion-head:focus-visible{outline:2px solid var(--primary-dark);outline-offset:2px;}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
-  .accordion-body{padding:0 14px;max-height:0;overflow:hidden;transition:.25s;font-size:.88rem;color:var(--text);}
-  .accordion-item.open .accordion-body{padding:0 14px 14px;max-height:600px;}
-  .breath-circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--accent),var(--primary));margin:20px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;transition:transform 4s ease-in-out;transform:scale(.7);}
-  .result-box{padding:14px;border-radius:10px;margin-top:14px;}
-  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:20px;}
+  .accordion-body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .3s cubic-bezier(.22,1,.36,1);font-size:.9rem;color:var(--text);}
+  .accordion-item.open .accordion-body{padding:0 16px 16px;max-height:600px;}
+  .breath-circle{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,var(--accent),var(--primary-dark));margin:24px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:Georgia,serif;transition:transform 4s ease-in-out;transform:scale(.72);box-shadow:0 6px 24px rgba(39,69,57,.18);}
+  .result-box{padding:18px;border-radius:12px;margin-top:var(--space-4);}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:28px 20px;}
 </style>
 </head>
 <body>
@@ -211,7 +217,7 @@ function evaluateTriage(){
   const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
   const names = {stress:'Saringan Tekanan', depression:'Saringan Mood Rendah / Kemurungan', anxiety:'Saringan Kecemasan', selfesteem:'Saringan Harga Diri'};
   resultEl.innerHTML = `
-    <div class="result-box" style="background:#eef4fb;">
+    <div class="result-box" style="background:#eef2ec;">
       <p>Berdasarkan jawapan anda, kami cadangkan anda cuba ujian berikut:</p>
       <ol>${sorted.map(t=>`<li><strong>${names[t]}</strong> <button class="btn secondary" style="margin-left:8px;padding:4px 10px;font-size:.78rem;" onclick="goTo('tests');startTest('${t}')">Mula</button></li>`).join('')}</ol>
     </div>`;
@@ -352,7 +358,7 @@ function submitTest(key){
     return;
   }
   const r = t.interpret(total);
-  let html = `<div class="result-box" style="background:${r.level==='ok'?'#eafaf1':r.level==='warn'?'#fff6e6':'#fdeceb'};">
+  let html = `<div class="result-box" style="background:${r.level==='ok'?'#e6efe8':r.level==='warn'?'#f3e6cf':'#f7e7e3'};">
     <p>Skor anda: <strong>${total}</strong></p>
     <p><span class="badge ${r.level}">${r.label}</span></p>
     <p>${r.text}</p>
@@ -450,20 +456,20 @@ function drawMoodChart(data){
   const w = canvas.width, h = canvas.height;
   ctx.clearRect(0,0,w,h);
   if(data.length===0){
-    ctx.fillStyle='#9aa5b1'; ctx.font='14px sans-serif';
+    ctx.fillStyle='#9c9485'; ctx.font='14px sans-serif';
     ctx.fillText('Tiada data lagi. Mula simpan entri jurnal anda.', 10, h/2);
     return;
   }
   const pad=30;
   const stepX = (w-2*pad)/Math.max(data.length-1,1);
-  ctx.strokeStyle='#e2e8f0';
+  ctx.strokeStyle='#e6e0d3';
   ctx.beginPath();
   for(let yv=1;yv<=5;yv++){
     const y = h-pad-( (yv-1)/4 )*(h-2*pad);
     ctx.moveTo(pad,y); ctx.lineTo(w-pad,y);
   }
   ctx.stroke();
-  ctx.strokeStyle='#3a6ea5'; ctx.lineWidth=2;
+  ctx.strokeStyle='#3d6b5c'; ctx.lineWidth=2;
   ctx.beginPath();
   data.forEach((e,i)=>{
     const x = pad+i*stepX;
@@ -471,13 +477,13 @@ function drawMoodChart(data){
     if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
   });
   ctx.stroke();
-  ctx.fillStyle='#3a6ea5';
+  ctx.fillStyle='#3d6b5c';
   data.forEach((e,i)=>{
     const x = pad+i*stepX;
     const y = h-pad-((e.mood-1)/4)*(h-2*pad);
     ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
   });
-  ctx.fillStyle='#6b7785'; ctx.font='10px sans-serif';
+  ctx.fillStyle='#736b5e'; ctx.font='10px sans-serif';
   data.forEach((e,i)=>{
     const x = pad+i*stepX;
     ctx.fillText(e.date.slice(5), x-14, h-8);
