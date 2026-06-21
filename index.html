@@ -1,287 +1,128 @@
 <!DOCTYPE html>
-<html lang="ms" data-theme="light">
+<html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#e3490d">
 <title>Minda Sihat — Penilaian &amp; Sokongan Psikologi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --font-display:'Fraunces',Georgia,serif;
-    --font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-    --bg:#faf7f1; --bg2:#f1ecdc;
-    --card:#fffefb; --card-2:#fbf7ee;
-    --ink:#17150f;
-    --text:#17150f; --muted:#6f6a5c; --faint:#a39d8a;
-    --primary:#e3490d; --primary-2:#ff7a45; --primary-soft:#fde9dd;
-    --accent:#0f8a7e; --accent-soft:#e1f3f0;
-    --ok:#157f3d; --ok-soft:#e3f5e9;
-    --warn:#b5650a; --warn-soft:#fbecd9;
-    --danger:#c1331f; --danger-soft:#fbe6e2;
-    --border:#e7e0cd; --border-2:#efe9d9;
-    --shadow-sm:3px 3px 0 var(--ink);
-    --shadow:5px 5px 0 var(--ink);
-    --shadow-lg:8px 8px 0 var(--ink);
-    --radius:18px; --radius-sm:12px;
-  }
-  html[data-theme="dark"]{
-    --bg:#15130e; --bg2:#1c1912;
-    --card:#1e1b14; --card-2:#241f17;
-    --ink:#f3efe2;
-    --text:#f3efe2; --muted:#b8b09a; --faint:#7d7763;
-    --primary:#ff7a45; --primary-2:#ffa06b; --primary-soft:#332217;
-    --accent:#2dd4bf; --accent-soft:#16302c;
-    --ok:#34d399; --ok-soft:#16301f;
-    --warn:#fbbf24; --warn-soft:#332708;
-    --danger:#f87171; --danger-soft:#341714;
-    --border:#3a3324; --border-2:#332d20;
-    --shadow-sm:3px 3px 0 var(--ink);
-    --shadow:5px 5px 0 var(--ink);
-    --shadow-lg:8px 8px 0 var(--ink);
+    --bg:#f7f4ed; --card:#fffdf9; --primary:#3d6b5c; --primary-dark:#274539;
+    --accent:#c97b4a; --text:#2b2925; --muted:#736b5e; --danger:#a13d2e;
+    --warn:#8a5a1f; --warn-bg:#f3e6cf; --ok:#2f6b4f; --border:#e6e0d3;
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px;
+    --shadow-light:#fffdf9; --shadow-dark:rgba(61,107,92,.14);
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
-  body::before{content:"";position:fixed;inset:0;z-index:-1;
-    background-image:radial-gradient(circle,var(--border) 1.2px,transparent 1.2px);
-    background-size:28px 28px;opacity:.6;pointer-events:none;}
-
-  /* Topbar */
-  .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
-    padding:14px 18px;background:var(--bg);border-bottom:2px solid var(--ink);}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;letter-spacing:-.01em;font-family:var(--font-display);}
-  .brand .logo{width:34px;height:34px;border-radius:10px;background:var(--primary);border:2px solid var(--ink);display:grid;place-items:center;
-    box-shadow:var(--shadow-sm);font-size:1rem;}
-  .icon-btn{width:40px;height:40px;border-radius:10px;border:2px solid var(--ink);background:var(--card);
-    color:var(--text);cursor:pointer;display:grid;place-items:center;transition:.15s;font-size:1.1rem;box-shadow:var(--shadow-sm);}
-  .icon-btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);}
-  .icon-btn:active{transform:translate(0,0);box-shadow:1px 1px 0 var(--ink);}
-
-  /* Nav */
-  nav{position:sticky;top:65px;z-index:20;display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;
-    padding:12px 18px 0;background:var(--bg);border-bottom:1px solid var(--border);}
-  nav::-webkit-scrollbar{display:none;}
-  nav button{flex:0 0 auto;border:none;border-bottom:3px solid transparent;background:transparent;color:var(--muted);
-    padding:6px 2px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;
-    display:flex;align-items:center;gap:7px;white-space:nowrap;transition:.15s;}
-  nav button svg{width:16px;height:16px;}
-  nav button:hover{color:var(--text);}
-  nav button.active{color:var(--ink);border-bottom-color:var(--primary);}
-
-  main{max-width:780px;margin:0 auto;padding:22px 18px 90px;}
+  body{margin:0;font-family:'Raleway',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+  h1,h2,h3,h4{font-family:'Lora',Georgia,'Iowan Old Style','Palatino Linotype',serif;letter-spacing:-.01em;}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
+  }
+  header{background:linear-gradient(160deg,var(--primary),var(--primary-dark));color:#fff;padding:32px 16px 28px;text-align:center;}
+  header h1{margin:0 0 6px;font-size:1.85rem;font-weight:600;}
+  header p{margin:0 auto;max-width:480px;opacity:.92;font-size:.92rem;}
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-2);background:var(--card);padding:var(--space-3);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
+  nav button{border:1px solid var(--border);background:transparent;color:var(--text);padding:9px 16px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s ease-out;}
+  nav button:hover{border-color:var(--primary);color:var(--primary-dark);}
+  nav button.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+  main{max-width:880px;margin:0 auto;padding:var(--space-5) 14px 60px;}
   section{display:none;}
-  section.active{display:block;animation:rise .45s cubic-bezier(.2,.7,.2,1);}
-  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-
-  .card{background:var(--card);border:2px solid var(--ink);border-radius:var(--radius);padding:26px;
-    margin-bottom:20px;box-shadow:var(--shadow);}
-  h1,h2,h3,h4{letter-spacing:-.01em;margin-top:0;font-family:var(--font-display);}
-  h2{font-size:1.55rem;font-weight:600;}
-  h3{font-size:1.15rem;font-weight:600;}
-  .muted{color:var(--muted);font-size:.9rem;}
-  .eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--primary);margin-bottom:14px;}
-
-  /* Hero */
-  .hero{position:relative;overflow:hidden;border-radius:var(--radius);padding:42px 30px;color:var(--bg);background:var(--ink);
-    box-shadow:var(--shadow-lg);margin-bottom:22px;border:2px solid var(--ink);}
-  .hero .kicker{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--primary-2);margin-bottom:16px;}
-  .hero h1{font-size:2.15rem;font-weight:600;margin:0 0 14px;position:relative;max-width:19ch;line-height:1.14;}
-  .hero p{margin:0 0 22px;opacity:.82;font-size:.97rem;max-width:34ch;position:relative;}
-  .hero .stats{display:flex;gap:9px;flex-wrap:wrap;position:relative;}
-  .hero .stat{font-size:.74rem;font-weight:600;border:1.5px solid rgba(250,247,241,.3);padding:6px 13px;border-radius:30px;color:rgba(250,247,241,.88);}
-  .hero .float{font-size:6.5rem;position:absolute;right:-6px;bottom:-26px;opacity:.1;transform:rotate(-8deg);}
-
-  .feature-grid{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
-  .feature{display:flex;gap:13px;align-items:flex-start;padding:17px;border-radius:var(--radius-sm);
-    background:var(--card-2);border:2px solid var(--ink);cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:var(--shadow-sm);}
-  .feature:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink);}
-  .feature .fi{flex:0 0 auto;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-size:1.2rem;background:var(--primary-soft);border:1.5px solid var(--ink);}
-  .feature h4{margin:0 0 3px;font-size:.95rem;font-family:var(--font-display);font-weight:600;}
-  .feature p{margin:0;font-size:.8rem;color:var(--muted);line-height:1.4;}
-
-  .disclaimer{display:flex;gap:10px;background:var(--warn-soft);border:2px solid var(--ink);
-    color:var(--text);padding:14px 16px;border-radius:var(--radius-sm);font-size:.83rem;margin-bottom:18px;box-shadow:var(--shadow-sm);}
-  .disclaimer b{color:var(--text);}
-  .crisis{display:flex;gap:10px;background:var(--danger-soft);border:2px solid var(--ink);
-    color:var(--text);padding:14px 16px;border-radius:var(--radius-sm);font-size:.86rem;margin-top:14px;box-shadow:var(--shadow-sm);}
-
-  /* Buttons */
-  .btn{font-family:inherit;border:2px solid var(--ink);cursor:pointer;font-weight:700;font-size:.92rem;padding:12px 22px;
-    border-radius:12px;background:var(--primary);color:#fff;display:inline-flex;align-items:center;gap:8px;
-    transition:transform .15s,box-shadow .15s;box-shadow:var(--shadow-sm);}
-  .btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);}
-  .btn:active{transform:translate(0,0);box-shadow:1px 1px 0 var(--ink);}
-  .btn.secondary{background:var(--card);color:var(--ink);}
-  .btn.secondary:hover{background:var(--primary-soft);}
-  .btn.ghost{background:transparent;color:var(--muted);box-shadow:none;border-color:transparent;padding:10px 14px;}
-  .btn.ghost:hover{background:var(--card-2);color:var(--text);transform:none;box-shadow:none;}
-  .btn.sm{padding:8px 15px;font-size:.8rem;border-radius:10px;}
+  section.active{display:block;animation:fade .3s cubic-bezier(.22,1,.36,1);}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 26px;margin-bottom:var(--space-4);box-shadow:6px 6px 16px var(--shadow-dark),-6px -6px 16px var(--shadow-light);}
+  h2{margin-top:0;color:var(--primary-dark);font-size:1.3rem;}
+  h3{color:var(--primary-dark);font-size:1.08rem;}
+  .muted{color:var(--muted);font-size:.88rem;}
+  .disclaimer{background:var(--warn-bg);border-left:3px solid var(--warn);color:#5e3f15;padding:12px 16px;border-radius:8px;font-size:.85rem;margin-bottom:var(--space-5);}
+  .crisis{background:#f7e7e3;border-left:3px solid var(--danger);color:#6d2c20;padding:14px 16px;border-radius:8px;font-size:.88rem;margin-top:var(--space-3);}
+  label.opt{display:flex;align-items:center;gap:var(--space-2);padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:var(--space-2);cursor:pointer;font-size:.9rem;transition:background .15s ease-out,border-color .15s ease-out,transform .1s ease-out;}
+  label.opt:hover{background:#f1ede2;border-color:var(--primary);}
+  label.opt:active{transform:scale(.99);}
+  input[type=checkbox],input[type=radio]{accent-color:var(--primary);width:17px;height:17px;}
+  .question{margin-bottom:var(--space-5);}
+  .question p.qtext{font-weight:600;margin-bottom:var(--space-2);}
+  .btn{background:var(--primary);color:#fff;border:none;padding:10px 20px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;font-size:.92rem;font-weight:600;cursor:pointer;transition:transform .15s ease-out,box-shadow .15s ease-out,background .15s ease-out;box-shadow:0 3px 8px rgba(39,69,57,.18);}
+  .btn:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 5px 12px rgba(39,69,57,.22);}
+  .btn:active{transform:scale(.97) translateY(0);box-shadow:inset 0 2px 6px rgba(0,0,0,.18);}
+  .btn.secondary{background:transparent;color:var(--primary-dark);border:1px solid var(--primary);box-shadow:none;}
+  .btn.secondary:hover{background:#eef2ec;}
   .btn.danger{background:var(--danger);}
-
-  /* Triage checkboxes as chips */
-  label.opt{display:flex;align-items:center;gap:11px;padding:13px 15px;border:2px solid var(--border);
-    border-radius:13px;margin-bottom:9px;cursor:pointer;font-size:.9rem;transition:.15s;background:var(--card);}
-  label.opt:hover{border-color:var(--ink);background:var(--card-2);}
-  label.opt:has(input:checked){border-color:var(--ink);background:var(--primary-soft);box-shadow:var(--shadow-sm);}
-  .opt .check{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--faint);
-    display:grid;place-items:center;transition:.15s;color:#fff;}
-  label.opt:has(input:checked) .check{background:var(--primary);border-color:var(--ink);}
-  .opt .check svg{width:13px;height:13px;opacity:0;transition:.15s;}
-  label.opt:has(input:checked) .check svg{opacity:1;}
-  .opt input{position:absolute;opacity:0;pointer-events:none;}
-
-  /* Test cards */
-  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-  .test-card{position:relative;overflow:hidden;border:2px solid var(--ink);border-radius:var(--radius-sm);
-    padding:19px;background:var(--card-2);cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:var(--shadow-sm);}
-  .test-card:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink);}
-  .test-card .tc-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:1.4rem;margin-bottom:12px;border:1.5px solid var(--ink);}
-  .test-card h4{margin:0 0 5px;font-size:1.05rem;font-family:var(--font-display);font-weight:600;}
-  .test-card p{margin:0 0 14px;font-size:.82rem;color:var(--muted);line-height:1.45;}
-  .test-card .tc-go{font-size:.82rem;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:5px;}
-
-  /* Progress bar */
-  .progress-wrap{position:sticky;top:118px;z-index:5;background:var(--card);padding:10px 0 4px;margin:-4px 0 14px;}
-  .progress-top{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px;}
-  .progress-bar{height:9px;border-radius:99px;background:var(--border);overflow:hidden;border:1.5px solid var(--ink);}
-  .progress-fill{height:100%;border-radius:99px;background:var(--primary);width:0;transition:width .35s cubic-bezier(.2,.7,.2,1);}
-
-  .question{padding:16px 0;border-top:1px solid var(--border-2);}
-  .question:first-of-type{border-top:none;}
-  .question .qtext{font-weight:700;margin:0 0 12px;font-size:.96rem;}
-  .answers{display:grid;gap:8px;}
-  label.ans{display:flex;align-items:center;gap:11px;padding:11px 14px;border:2px solid var(--border);
-    border-radius:11px;cursor:pointer;font-size:.88rem;transition:.15s;}
-  label.ans:hover{border-color:var(--ink);}
-  label.ans:has(input:checked){border-color:var(--ink);background:var(--primary-soft);font-weight:600;}
-  .ans .radio{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--faint);transition:.15s;position:relative;}
-  label.ans:has(input:checked) .radio{border-color:var(--primary);}
-  label.ans:has(input:checked) .radio::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--primary);}
-  .ans input{position:absolute;opacity:0;pointer-events:none;}
-
-  /* Result gauge */
-  .result-box{margin-top:18px;border-radius:var(--radius-sm);padding:22px;border:2px solid var(--ink);animation:rise .4s;box-shadow:var(--shadow-sm);}
-  .gauge-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-  .gauge{position:relative;width:120px;height:120px;flex:0 0 auto;}
-  .gauge svg{transform:rotate(-90deg);}
-  .gauge .gval{position:absolute;inset:0;display:grid;place-content:center;text-align:center;}
-  .gauge .gval b{font-size:1.6rem;font-weight:700;line-height:1;font-family:var(--font-display);}
-  .gauge .gval span{font-size:.7rem;color:var(--muted);}
-  .result-meta{flex:1;min-width:160px;}
-  .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:700;color:#fff;margin-bottom:8px;border:1.5px solid var(--ink);}
-  .badge.ok{background:var(--ok);} .badge.warn{background:var(--warn);} .badge.danger{background:var(--danger);}
-
-  /* Mood picker */
-  .moodrow{display:flex;gap:8px;margin:10px 0 4px;}
-  .mood-emoji{flex:1;padding:12px 4px;border-radius:13px;cursor:pointer;border:2px solid var(--border);
-    text-align:center;transition:.15s;background:var(--card);}
-  .mood-emoji .em{font-size:1.7rem;display:block;transition:transform .2s;}
-  .mood-emoji .lb{font-size:.62rem;color:var(--muted);margin-top:3px;display:block;}
-  .mood-emoji:hover{border-color:var(--ink);}
-  .mood-emoji:hover .em{transform:scale(1.18);}
-  .mood-emoji.selected{border-color:var(--ink);background:var(--primary-soft);box-shadow:var(--shadow-sm);}
-  .mood-emoji.selected .em{transform:scale(1.22);}
-
-  label.fld{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin:12px 0 6px;}
-  textarea,input[type=date]{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:12px;
-    font-size:.9rem;font-family:inherit;background:var(--card);color:var(--text);transition:.15s;resize:vertical;}
-  textarea:focus,input[type=date]:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 4px var(--primary-soft);}
-
-  table{width:100%;border-collapse:collapse;font-size:.85rem;}
-  th{text-align:left;padding:8px 6px;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);border-bottom:2px solid var(--ink);}
-  td{padding:11px 6px;border-bottom:1px solid var(--border-2);vertical-align:top;}
-  .empty{text-align:center;padding:26px 10px;color:var(--faint);}
-  .empty .big{font-size:2.2rem;display:block;margin-bottom:8px;}
-
-  /* Accordion */
-  .accordion-item{border:2px solid var(--ink);border-radius:var(--radius-sm);margin-bottom:10px;overflow:hidden;background:var(--card);transition:box-shadow .15s;}
-  .accordion-item.open{box-shadow:var(--shadow-sm);}
-  .accordion-head{padding:15px 16px;cursor:pointer;font-weight:600;font-family:var(--font-display);font-size:.98rem;display:flex;justify-content:space-between;align-items:center;gap:10px;}
-  .accordion-head .plus{flex:0 0 auto;width:26px;height:26px;border-radius:7px;background:var(--primary-soft);color:var(--primary);border:1.5px solid var(--ink);
-    display:grid;place-items:center;font-size:1.2rem;transition:.25s;}
-  .accordion-item.open .plus{transform:rotate(135deg);}
-  .accordion-body{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted);font-size:.88rem;}
-  .accordion-item.open .accordion-body{max-height:400px;}
-  .accordion-body p{margin:0;padding:0 16px 16px;}
-
-  /* Breathing */
-  .breath-stage{display:grid;place-items:center;padding:10px 0 4px;}
-  .breath-circle{width:170px;height:170px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;
-    font-size:1.05rem;background:var(--primary);border:2.5px solid var(--ink);
-    transform:scale(.62);transition:transform 4s ease-in-out;box-shadow:var(--shadow-lg);}
-  .breath-stage{position:relative;}
-
-  footer{text-align:center;color:var(--faint);font-size:.78rem;padding:26px 16px 32px;line-height:1.6;border-top:1px solid var(--border);margin-top:8px;}
-  footer .dot{opacity:.5;margin:0 6px;}
-  .fade-up{animation:rise .4s;}
+  .grid{display:grid;gap:var(--space-4);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+  .test-card{border:1px solid var(--border);border-radius:16px;padding:var(--space-4);background:var(--bg);box-shadow:4px 4px 12px var(--shadow-dark),-4px -4px 12px var(--shadow-light);transition:transform .2s ease-out,box-shadow .2s ease-out;}
+  .test-card:hover{transform:translateY(-2px);box-shadow:6px 6px 16px var(--shadow-dark),-4px -4px 14px var(--shadow-light);}
+  .test-card h4{margin:0 0 6px;color:var(--primary-dark);font-family:'Lora',Georgia,serif;}
+  .badge{display:inline-block;padding:4px 12px;border-radius:12px;font-size:.75rem;font-weight:700;color:#fff;}
+  .badge.ok{background:var(--ok);} .badge.warn{background:var(--warn);color:#fff;} .badge.danger{background:var(--danger);}
+  .badge::before{margin-right:5px;}
+  .badge.ok::before{content:"✓";} .badge.warn::before{content:"⚠";} .badge.danger::before{content:"⚠";}
+  .moodrow{display:flex;gap:var(--space-2);justify-content:space-between;margin-bottom:var(--space-3);background:linear-gradient(90deg,#dce7f0,#e9e7d8,#f3e6cf,#fbe3c9,#f6d9b3);border-radius:16px;padding:var(--space-2);}
+  .mood-emoji{font-size:1.8rem;padding:var(--space-2);min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:12px;cursor:pointer;border:2px solid transparent;flex:1;text-align:center;background:rgba(255,253,249,.55);transition:transform .15s ease-out,border-color .15s ease-out,box-shadow .15s ease-out;}
+  .mood-emoji:hover{border-color:var(--primary);transform:translateY(-2px);}
+  .mood-emoji:active{transform:scale(.95);}
+  .mood-emoji.selected{border-color:var(--primary);background:#fff;box-shadow:0 3px 10px rgba(39,69,57,.16);}
+  textarea,input[type=date],input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:.9rem;font-family:inherit;background:#fff;}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:var(--space-3);}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border);}
+  th{font-family:Georgia,serif;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;}
+  .accordion-item{border:1px solid var(--border);border-radius:14px;margin-bottom:var(--space-2);overflow:hidden;box-shadow:3px 3px 10px var(--shadow-dark),-3px -3px 10px var(--shadow-light);}
+  .accordion-head{padding:14px 16px;min-height:44px;background:var(--card);cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;transition:.15s ease-out;}
+  .accordion-head:hover{background:#f1ede2;}
+  .accordion-item.open .accordion-head{color:var(--primary-dark);}
+  nav button:focus-visible,.btn:focus-visible,.mood-emoji:focus-visible,.accordion-head:focus-visible{outline:2px solid var(--primary-dark);outline-offset:2px;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .accordion-body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .3s cubic-bezier(.22,1,.36,1);font-size:.9rem;color:var(--text);}
+  .accordion-item.open .accordion-body{padding:0 16px 16px;max-height:600px;}
+  .breath-circle{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,var(--accent),var(--primary-dark));margin:24px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:'Lora',Georgia,serif;transition:transform 4s ease-in-out;transform:scale(.72);box-shadow:0 6px 24px rgba(39,69,57,.18),0 0 0 10px rgba(201,123,74,.08);}
+  .result-box{padding:18px;border-radius:12px;margin-top:var(--space-4);}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:28px 20px;}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand"><span class="logo">🧠</span> Minda Sihat</div>
-  <button class="icon-btn" id="themeToggle" title="Tukar mod gelap/cerah" aria-label="Tukar tema">🌙</button>
-</div>
+<header>
+  <h1>🧠 Minda Sihat</h1>
+  <p>Kenal pasti masalah, jalani saringan psikologi, jurnal mood &amp; sumber edukasi kesihatan mental</p>
+</header>
 
 <nav id="nav">
-  <button data-target="home" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Utama</button>
-  <button data-target="triage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>Kenal Pasti</button>
-  <button data-target="tests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Ujian</button>
-  <button data-target="journal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l5-5 4 4 8-8"/><path d="M16 5h5v5"/></svg>Jurnal</button>
-  <button data-target="edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v13"/><path d="M3 5.5C5 4.5 9 4.5 12 7c3-2.5 7-2.5 9-1.5V19c-2-1-6-1-9 1.5C9 18 5 18 3 19z"/></svg>Edukasi</button>
+  <button data-target="home" class="active">Utama</button>
+  <button data-target="triage">Kenal Pasti Masalah</button>
+  <button data-target="tests">Ujian Psikologi</button>
+  <button data-target="journal">Jurnal Mood</button>
+  <button data-target="edu">Edukasi</button>
 </nav>
 
 <main>
 
   <div class="disclaimer">
-    <span style="font-size:1.1rem;">⚠️</span>
-    <div>Aplikasi ini adalah alat <b>saringan kendiri</b>, bukan diagnostik klinikal. Hasilnya tidak menggantikan penilaian profesional bertauliah. Jika anda dalam krisis, hubungi <b>Talian Kasih 15999</b> atau <b>Befrienders KL 03-76272929</b> serta-merta.</div>
+    ⚠️ Aplikasi ini adalah alat <strong>saringan kendiri</strong> dan bukan alat diagnostik klinikal. Hasilnya tidak menggantikan penilaian oleh pegawai psikologi/psikiatri bertauliah. Jika anda dalam krisis atau ada fikiran untuk menyakiti diri, sila hubungi <strong>Talian Kasih 15999</strong> atau <strong>Befrienders KL 03-76272929</strong> serta-merta.
   </div>
 
   <!-- HOME -->
   <section id="home" class="active">
-    <div class="hero">
-      <span class="kicker">Minda Sihat</span>
-      <h1>Jaga minda anda, satu langkah setiap hari.</h1>
-      <p>Kenal pasti perasaan anda, jalani saringan psikologi, dan bina tabiat sihat mental.</p>
-      <div class="stats">
-        <span class="stat">4 ujian saringan</span>
-        <span class="stat">100% sulit di peranti</span>
-        <span class="stat">Tanpa kos</span>
-      </div>
-      <span class="float">🌿</span>
-    </div>
     <div class="card">
-      <span class="eyebrow">✨ Apa yang anda boleh buat</span>
-      <div class="feature-grid">
-        <div class="feature" onclick="goTo('triage')"><div class="fi">🔍</div><div><h4>Kenal Pasti Masalah</h4><p>Cadangan ujian ikut perasaan anda</p></div></div>
-        <div class="feature" onclick="goTo('tests')"><div class="fi">📋</div><div><h4>Ujian Psikologi</h4><p>Saringan tekanan, cemas, mood &amp; harga diri</p></div></div>
-        <div class="feature" onclick="goTo('journal')"><div class="fi">📈</div><div><h4>Jurnal Mood</h4><p>Rekod &amp; lihat trend emosi anda</p></div></div>
-        <div class="feature" onclick="goTo('edu')"><div class="fi">🌬️</div><div><h4>Edukasi &amp; Self-Care</h4><p>Tips praktikal + latihan pernafasan</p></div></div>
-      </div>
-      <div style="margin-top:18px;">
-        <button class="btn" onclick="goTo('triage')">Mula sekarang
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-        </button>
-      </div>
+      <h2>Selamat datang 👋</h2>
+      <p>Aplikasi ini membantu anda:</p>
+      <ul>
+        <li><strong>Kenal Pasti Masalah</strong> — soalan ringkas untuk cadangkan ujian yang sesuai dengan apa yang anda alami.</li>
+        <li><strong>Ujian Psikologi</strong> — saringan tekanan, kecemasan, mood rendah &amp; harga diri dengan skor dan interpretasi.</li>
+        <li><strong>Jurnal Mood</strong> — rekod mood harian dan lihat trend dari semasa ke semasa.</li>
+        <li><strong>Edukasi</strong> — panduan praktikal mengurus tekanan, kecemasan, tidur dan bila perlu jumpa profesional.</li>
+      </ul>
+      <button class="btn" onclick="goTo('triage')">Mula dengan Kenal Pasti Masalah →</button>
     </div>
   </section>
 
   <!-- TRIAGE -->
   <section id="triage">
     <div class="card">
-      <span class="eyebrow">🔍 Langkah 1</span>
       <h2>Kenal Pasti Masalah</h2>
-      <p class="muted">Tandakan apa yang anda rasa dalam 2 minggu lepas. Boleh pilih lebih dari satu.</p>
-      <div id="triageForm" style="margin-top:14px;"></div>
-      <button class="btn" onclick="evaluateTriage()">Cadangkan Ujian
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-      </button>
+      <p class="muted">Tandakan apa yang anda rasa kebelakangan ini (2 minggu lepas). Boleh pilih lebih dari satu.</p>
+      <div id="triageForm"></div>
+      <button class="btn" onclick="evaluateTriage()">Cadangkan Ujian</button>
       <div id="triageResult"></div>
     </div>
   </section>
@@ -289,10 +130,9 @@
   <!-- TESTS -->
   <section id="tests">
     <div class="card">
-      <span class="eyebrow">📋 Saringan</span>
       <h2>Ujian Psikologi</h2>
-      <p class="muted">Pilih satu saringan. Jawab ikut perasaan anda dalam 2 minggu kebelakangan.</p>
-      <div class="grid" id="testList" style="margin-top:16px;"></div>
+      <p class="muted">Pilih satu saringan untuk dimulakan. Jawab mengikut perasaan anda dalam 2 minggu kebelakangan.</p>
+      <div class="grid" id="testList"></div>
     </div>
     <div class="card" id="testRunner" style="display:none;"></div>
   </section>
@@ -300,193 +140,219 @@
   <!-- JOURNAL -->
   <section id="journal">
     <div class="card">
-      <span class="eyebrow">📈 Rekod harian</span>
       <h2>Jurnal Mood</h2>
-      <label class="fld">Tarikh</label>
+      <label class="muted">Tarikh</label>
       <input type="date" id="journalDate">
-      <label class="fld">Mood hari ini</label>
+      <div style="height:10px;"></div>
+      <label class="muted">Mood hari ini</label>
       <div class="moodrow" id="moodPicker"></div>
-      <label class="fld">Nota (pilihan)</label>
-      <textarea id="journalNote" rows="3" placeholder="Contoh: Hari ini agak penat tapi sempat berjalan petang..."></textarea>
-      <div style="margin-top:14px;display:flex;align-items:center;gap:12px;">
-        <button class="btn" onclick="saveJournal()">Simpan Entri</button>
-        <span id="journalSaveMsg" class="muted"></span>
-      </div>
+      <label class="muted">Nota (apa yang berlaku / apa yang dirasakan)</label>
+      <textarea id="journalNote" rows="3" placeholder="Contoh: Hari ini agak penat di tempat kerja tetapi sempat berjalan petang..."></textarea>
+      <div style="height:10px;"></div>
+      <button class="btn" onclick="saveJournal()">Simpan Entri</button>
+      <span id="journalSaveMsg" class="muted"></span>
     </div>
     <div class="card">
-      <h3 style="margin-bottom:4px;">Trend Mood</h3>
-      <p class="muted" style="margin-top:0;">14 entri terakhir</p>
-      <canvas id="moodChart" width="800" height="220" style="width:100%;height:auto;"></canvas>
+      <h3>Trend Mood (14 entri terakhir)</h3>
+      <canvas id="moodChart" width="800" height="200" style="width:100%;max-width:800px;height:200px;" role="img" aria-label="Graf trend mood 14 entri terakhir. Data penuh tersedia dalam jadual Sejarah Entri di bawah."></canvas>
     </div>
     <div class="card">
       <h3>Sejarah Entri</h3>
-      <div id="journalTableWrap"></div>
+      <table id="journalTable"><thead><tr><th>Tarikh</th><th>Mood</th><th>Nota</th><th></th></tr></thead><tbody></tbody></table>
     </div>
   </section>
 
   <!-- EDU -->
   <section id="edu">
     <div class="card">
-      <span class="eyebrow">📚 Belajar</span>
       <h2>Edukasi &amp; Self-Care</h2>
-      <div id="accordionWrap" style="margin-top:14px;"></div>
+      <div id="accordionWrap"></div>
     </div>
-    <div class="card" style="text-align:center;">
-      <h3>🌬️ Latihan Pernafasan</h3>
-      <p class="muted">Teknik 4-4-6 — ikut bulatan ini. Ulang 5 kali untuk tenang.</p>
-      <div class="breath-stage"><div class="breath-circle" id="breathCircle">Mula</div></div>
-      <button class="btn secondary" style="margin-top:8px;" onclick="startBreathing()">Mula Latihan</button>
+    <div class="card">
+      <h3>🌬️ Latihan Pernafasan Ringkas</h3>
+      <p class="muted">Teknik 4-4-6: tarik nafas 4 saat, tahan 4 saat, lepas nafas 6 saat. Ulang 5 kali.</p>
+      <div class="breath-circle" id="breathCircle">Mula</div>
+      <div style="text-align:center;">
+        <button class="btn secondary" onclick="startBreathing()">Mula Latihan</button>
+      </div>
     </div>
   </section>
 
 </main>
 
-<footer>Minda Sihat <span class="dot">•</span> Data disimpan di peranti anda sahaja (localStorage) <span class="dot">•</span> Tiada penghantaran ke pelayan</footer>
+<footer>Minda Sihat • Data disimpan secara tempatan di peranti anda sahaja (localStorage), tidak dihantar ke mana-mana pelayan.</footer>
 
 <script>
-/* ---------- Theme ---------- */
-const themeBtn = document.getElementById('themeToggle');
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme', t);
-  themeBtn.textContent = t==='dark' ? '☀️' : '🌙';
-  document.querySelector('meta[name=theme-color]').setAttribute('content', t==='dark'?'#15130e':'#e3490d');
-}
-applyTheme(localStorage.getItem('mindasihat_theme') || 'light');
-themeBtn.onclick = ()=>{
-  const next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light':'dark';
-  localStorage.setItem('mindasihat_theme', next);
-  applyTheme(next);
-  if(document.getElementById('journal').classList.contains('active')) renderJournal();
-};
-
 /* ---------- Navigation ---------- */
-const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 function goTo(id){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active', b.dataset.target===id));
   if(id==='journal') renderJournal();
-  window.scrollTo({top:0, behavior:'smooth'});
 }
 document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.target)));
 
 /* ---------- Triage ---------- */
 const triageItems = [
-  {key:'sleep', icon:'😴', label:'Sukar tidur atau tidur tidak memuaskan'},
-  {key:'sad', icon:'😔', label:'Rasa sedih, hilang minat dalam aktiviti harian'},
-  {key:'anxious', icon:'😰', label:'Rasa risau/cemas berlebihan yang sukar dikawal'},
-  {key:'stress', icon:'😣', label:'Rasa tertekan dengan kerja, mudah marah atau letih'},
-  {key:'selfesteem', icon:'🪞', label:'Rasa rendah diri atau kerap membandingkan diri'},
-  {key:'social', icon:'🚪', label:'Mengelak daripada bersosial atau berjumpa orang'},
-  {key:'concentration', icon:'🌀', label:'Sukar fokus atau membuat keputusan'},
+  {key:'sleep', label:'Sukar tidur, kerap terjaga malam, atau tidur tidak memuaskan'},
+  {key:'sad', label:'Rasa sedih, hilang minat/keseronokan dalam aktiviti harian'},
+  {key:'anxious', label:'Rasa risau/cemas berlebihan yang sukar dikawal'},
+  {key:'stress', label:'Rasa tertekan dengan kerja/tugasan, mudah marah atau letih'},
+  {key:'selfesteem', label:'Rasa rendah diri, tidak yakin, atau kerap membandingkan diri secara negatif'},
+  {key:'social', label:'Mengelak daripada bersosial atau berjumpa orang lain'},
+  {key:'concentration', label:'Sukar fokus / membuat keputusan'},
 ];
 const triageForm = document.getElementById('triageForm');
 triageItems.forEach(item=>{
   const lab = document.createElement('label');
   lab.className='opt';
-  lab.innerHTML = `<input type="checkbox" value="${item.key}"><span class="check">${CHECK_SVG}</span><span style="font-size:1.15rem;">${item.icon}</span><span>${item.label}</span>`;
+  lab.innerHTML = `<input type="checkbox" value="${item.key}"> ${item.label}`;
   triageForm.appendChild(lab);
 });
-const triageToTest = {sleep:'stress', sad:'depression', anxious:'anxiety', stress:'stress', selfesteem:'selfesteem', social:'anxiety', concentration:'stress'};
+
+const triageToTest = {
+  sleep:'stress', sad:'depression', anxious:'anxiety', stress:'stress',
+  selfesteem:'selfesteem', social:'anxiety', concentration:'stress'
+};
 
 function evaluateTriage(){
   const checked = Array.from(triageForm.querySelectorAll('input:checked')).map(i=>i.value);
   const resultEl = document.getElementById('triageResult');
   if(checked.length===0){
-    resultEl.innerHTML = '<div class="result-box fade-up" style="background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 40%,transparent);"><p class="muted" style="margin:0;">Sila tandakan sekurang-kurangnya satu perkara di atas.</p></div>';
+    resultEl.innerHTML = '<p class="muted">Sila tandakan sekurang-kurangnya satu perkara di atas.</p>';
     return;
   }
   const counts = {};
-  checked.forEach(k=>{ const t = triageToTest[k]; counts[t]=(counts[t]||0)+1; });
+  checked.forEach(k=>{
+    const t = triageToTest[k];
+    counts[t] = (counts[t]||0)+1;
+  });
   const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
-  const names = {stress:'Saringan Tekanan', depression:'Saringan Mood Rendah', anxiety:'Saringan Kecemasan', selfesteem:'Saringan Harga Diri'};
+  const names = {stress:'Saringan Tekanan', depression:'Saringan Mood Rendah / Kemurungan', anxiety:'Saringan Kecemasan', selfesteem:'Saringan Harga Diri'};
   resultEl.innerHTML = `
-    <div class="result-box fade-up" style="background:var(--primary-soft);border-color:var(--ink);">
-      <p style="margin-top:0;font-weight:700;">✨ Berdasarkan jawapan anda, cuba ujian ini:</p>
-      <div style="display:flex;flex-direction:column;gap:9px;">
-        ${sorted.map((t,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);padding:11px 14px;border-radius:12px;border:1px solid var(--border);">
-          <span style="font-weight:600;font-size:.9rem;">${i+1}. ${names[t]}</span>
-          <button class="btn sm" onclick="goTo('tests');startTest('${t}')">Mula</button>
-        </div>`).join('')}
-      </div>
+    <div class="result-box" style="background:#eef2ec;">
+      <p>Berdasarkan jawapan anda, kami cadangkan anda cuba ujian berikut:</p>
+      <ol>${sorted.map(t=>`<li><strong>${names[t]}</strong> <button class="btn secondary" style="margin-left:8px;padding:4px 10px;font-size:.78rem;" onclick="goTo('tests');startTest('${t}')">Mula</button></li>`).join('')}</ol>
     </div>`;
 }
 
 /* ---------- Tests ---------- */
 const tests = {
-  stress: {name:'Saringan Tekanan', icon:'😣', tint:'#f59e0b', desc:'10 soalan tentang tahap tekanan anda.',
+  stress: {
+    name:'Saringan Tekanan',
+    desc:'10 soalan tentang tahap tekanan anda dalam 2 minggu lepas.',
     options:[{l:'Tidak pernah',v:0},{l:'Kadang-kadang',v:1},{l:'Selalu',v:2},{l:'Hampir setiap hari',v:3}],
-    items:['Saya rasa tertekan dengan tugasan/kerja harian','Saya sukar untuk bertenang','Saya mudah marah atau cepat naik angin','Saya rasa keletihan walaupun selepas berehat','Saya sukar fokus disebabkan terlalu banyak fikiran','Saya rasa terbeban dengan tanggungjawab saya','Saya rasa otot tegang tanpa sebab fizikal','Saya rasa tidak dapat mengawal perkara penting dalam hidup','Saya cepat terganggu dengan perkara kecil','Saya sukar untuk berehat sepenuhnya'],
-    interpret(s){ if(s<=9) return {level:'ok',label:'Tekanan Rendah',text:'Tahap tekanan anda kelihatan rendah. Teruskan amalan self-care yang baik.'}; if(s<=19) return {level:'warn',label:'Tekanan Sederhana',text:'Anda mengalami tekanan sederhana. Cuba teknik pernafasan dan urus masa dengan lebih baik.'}; return {level:'danger',label:'Tekanan Tinggi',text:'Tahap tekanan tinggi. Disyorkan berkongsi dengan orang dipercayai dan dapatkan bantuan profesional.'}; }
+    items:[
+      'Saya rasa tertekan dengan tugasan/kerja harian',
+      'Saya sukar untuk bertenang',
+      'Saya mudah marah atau cepat naik angin',
+      'Saya rasa keletihan walaupun selepas berehat',
+      'Saya sukar untuk fokus disebabkan terlalu banyak fikiran',
+      'Saya rasa terbeban dengan tanggungjawab saya',
+      'Saya rasa otot tegang (leher/bahu/kepala) tanpa sebab fizikal',
+      'Saya rasa tidak dapat mengawal perkara penting dalam hidup saya',
+      'Saya rasa cepat terganggu dengan perkara kecil',
+      'Saya rasa sukar untuk berehat sepenuhnya',
+    ],
+    interpret(score){
+      if(score<=9) return {level:'ok', label:'Tekanan Rendah', text:'Tahap tekanan anda kelihatan rendah. Teruskan amalan self-care yang baik.'};
+      if(score<=19) return {level:'warn', label:'Tekanan Sederhana', text:'Anda mengalami tekanan sederhana. Cuba teknik pernafasan dan urus masa dengan lebih baik. Lihat bahagian Edukasi.'};
+      return {level:'danger', label:'Tekanan Tinggi', text:'Tahap tekanan anda tinggi. Sangat disyorkan untuk berkongsi dengan rakan/keluarga yang dipercayai dan dapatkan bantuan profesional (kaunselor/psikologi).'};
+    }
   },
-  anxiety: {name:'Saringan Kecemasan', icon:'😰', tint:'#6366f1', desc:'7 soalan tentang perasaan risau/cemas.',
+  anxiety: {
+    name:'Saringan Kecemasan',
+    desc:'7 soalan tentang perasaan risau/cemas dalam 2 minggu lepas.',
     options:[{l:'Tidak pernah',v:0},{l:'Beberapa hari',v:1},{l:'Lebih separuh hari',v:2},{l:'Hampir setiap hari',v:3}],
-    items:['Rasa gelisah, cemas atau tegang','Tidak dapat berhenti atau mengawal risau','Terlalu risau tentang pelbagai perkara','Sukar untuk bertenang','Sangat gelisah sehingga sukar duduk diam','Mudah rasa kecut atau bimbang sesuatu buruk akan berlaku','Rasa cemas yang menjejaskan tumpuan'],
-    interpret(s){ if(s<=4) return {level:'ok',label:'Kecemasan Minima',text:'Tahap kecemasan anda minima.'}; if(s<=9) return {level:'warn',label:'Kecemasan Ringan',text:'Kecemasan ringan dikesan. Latihan pernafasan dan rehat cukup boleh membantu.'}; if(s<=14) return {level:'warn',label:'Kecemasan Sederhana',text:'Kecemasan sederhana. Pertimbangkan berbincang dengan kaunselor.'}; return {level:'danger',label:'Kecemasan Tinggi',text:'Kecemasan tinggi. Disyorkan kuat untuk dapatkan bantuan profesional.'}; }
+    items:[
+      'Rasa gelisah, cemas atau tegang',
+      'Tidak dapat berhenti atau mengawal risau',
+      'Terlalu risau tentang pelbagai perkara',
+      'Sukar untuk bertenang',
+      'Sangat gelisah sehingga sukar untuk duduk diam',
+      'Mudah rasa kecut/terkejut atau bimbang sesuatu buruk akan berlaku',
+      'Rasa tidak senang/cemas yang menjejaskan tumpuan',
+    ],
+    interpret(score){
+      if(score<=4) return {level:'ok', label:'Kecemasan Minima', text:'Tahap kecemasan anda minima.'};
+      if(score<=9) return {level:'warn', label:'Kecemasan Ringan', text:'Kecemasan ringan dikesan. Latihan pernafasan dan rehat yang cukup boleh membantu.'};
+      if(score<=14) return {level:'warn', label:'Kecemasan Sederhana', text:'Kecemasan sederhana. Pertimbangkan untuk berbincang dengan kaunselor.'};
+      return {level:'danger', label:'Kecemasan Tinggi', text:'Tahap kecemasan tinggi. Disyorkan kuat untuk mendapatkan bantuan profesional kesihatan mental.'};
+    }
   },
-  depression: {name:'Saringan Mood Rendah', icon:'😔', tint:'#8b5cf6', desc:'9 soalan tentang mood dan minat anda.',
+  depression: {
+    name:'Saringan Mood Rendah',
+    desc:'9 soalan tentang mood dan minat anda dalam 2 minggu lepas.',
     options:[{l:'Tidak pernah',v:0},{l:'Beberapa hari',v:1},{l:'Lebih separuh hari',v:2},{l:'Hampir setiap hari',v:3}],
-    items:['Kurang minat atau keseronokan melakukan sesuatu','Rasa sedih, murung atau berputus asa','Sukar tidur, atau tidur berlebihan','Rasa letih atau kurang tenaga','Selera makan berkurang atau makan berlebihan','Rasa diri tidak berguna atau mengecewakan diri/keluarga','Sukar fokus (contoh: membaca, menonton TV)','Bergerak/bercakap perlahan, atau sebaliknya resah','Terfikir lebih baik tiada di dunia, atau menyakiti diri'],
-    interpret(s){ if(s<=4) return {level:'ok',label:'Minima',text:'Mood anda kelihatan stabil.'}; if(s<=9) return {level:'warn',label:'Ringan',text:'Tanda mood rendah ringan. Cuba kekal aktif dan berhubung dengan orang disayangi.'}; if(s<=14) return {level:'warn',label:'Sederhana',text:'Tanda mood rendah sederhana. Disyorkan berjumpa kaunselor/pegawai psikologi.'}; return {level:'danger',label:'Teruk',text:'Tanda mood rendah serius dikesan. Sangat disyorkan dapatkan bantuan profesional secepat mungkin.'}; },
+    items:[
+      'Kurang minat atau keseronokan dalam melakukan sesuatu',
+      'Rasa sedih, murung atau berputus asa',
+      'Sukar tidur, atau tidur berlebihan',
+      'Rasa letih atau kurang tenaga',
+      'Selera makan berkurang atau makan berlebihan',
+      'Rasa diri tidak berguna atau mengecewakan diri/keluarga',
+      'Sukar fokus (contoh: membaca, menonton TV)',
+      'Bergerak/bercakap perlahan, atau sebaliknya resah & tidak boleh duduk diam',
+      'Terfikir bahawa lebih baik tiada di dunia, atau fikiran menyakiti diri',
+    ],
+    interpret(score){
+      let base;
+      if(score<=4) base={level:'ok', label:'Minima', text:'Mood anda kelihatan stabil.'};
+      else if(score<=9) base={level:'warn', label:'Ringan', text:'Tanda mood rendah ringan. Cuba kekal aktif dan berhubung dengan orang yang disayangi.'};
+      else if(score<=14) base={level:'warn', label:'Sederhana', text:'Tanda mood rendah sederhana. Disyorkan berjumpa kaunselor/pegawai psikologi.'};
+      else base={level:'danger', label:'Teruk', text:'Tanda mood rendah yang serius dikesan. Sangat disyorkan untuk mendapatkan bantuan profesional secepat mungkin.'};
+      return base;
+    },
     crisisItemIndex:8
   },
-  selfesteem: {name:'Saringan Harga Diri', icon:'🪞', tint:'#14b8a6', desc:'10 soalan tentang pandangan terhadap diri.',
+  selfesteem: {
+    name:'Saringan Harga Diri',
+    desc:'10 soalan tentang pandangan anda terhadap diri sendiri.',
     options:[{l:'Sangat tidak setuju',v:0},{l:'Tidak setuju',v:1},{l:'Setuju',v:2},{l:'Sangat setuju',v:3}],
-    items:['Secara keseluruhan, saya berpuas hati dengan diri saya','Saya rasa saya mempunyai beberapa kualiti yang baik','Saya rasa saya tidak mampu berbuat apa-apa dengan baik','Saya boleh melakukan sesuatu sama baik dengan orang lain','Saya rasa saya tidak banyak perkara untuk dibanggakan','Saya mempunyai sikap positif terhadap diri saya','Secara umum, saya berpuas hati dengan diri saya','Saya berharap saya boleh lebih menghormati diri saya','Saya kadangkala rasa saya tidak berguna','Saya kadangkala fikir saya tidak baik langsung'],
+    items:[
+      'Secara keseluruhan, saya berpuas hati dengan diri saya',
+      'Saya rasa saya mempunyai beberapa kualiti yang baik',
+      'Saya rasa saya tidak mampu berbuat apa-apa dengan baik',
+      'Saya boleh melakukan sesuatu sama baik dengan orang lain',
+      'Saya rasa saya tidak mempunyai banyak perkara untuk dibanggakan',
+      'Saya mempunyai sikap positif terhadap diri saya',
+      'Secara umum, saya berpuas hati dengan diri saya',
+      'Saya berharap saya boleh lebih menghormati diri saya',
+      'Saya kadangkala rasa saya tidak berguna',
+      'Saya kadangkala berfikir saya tidak baik langsung',
+    ],
     reversed:[2,4,7,8,9],
-    interpret(s){ if(s>=20) return {level:'ok',label:'Harga Diri Tinggi',text:'Anda mempunyai pandangan positif yang sihat terhadap diri sendiri.'}; if(s>=12) return {level:'warn',label:'Harga Diri Sederhana',text:'Harga diri sederhana. Amalan self-compassion dan rekod kejayaan kecil boleh membantu.'}; return {level:'danger',label:'Harga Diri Rendah',text:'Harga diri rendah dikesan. Pertimbangkan berbincang dengan kaunselor mengenai ini.'}; }
+    interpret(score){
+      if(score>=20) return {level:'ok', label:'Harga Diri Tinggi', text:'Anda mempunyai pandangan positif yang sihat terhadap diri sendiri.'};
+      if(score>=12) return {level:'warn', label:'Harga Diri Sederhana', text:'Harga diri sederhana. Amalan self-compassion dan rekod kejayaan kecil boleh membantu.'};
+      return {level:'danger', label:'Harga Diri Rendah', text:'Harga diri rendah dikesan. Pertimbangkan untuk berbincang dengan kaunselor mengenai ini.'};
+    }
   }
 };
 
-function tintBg(hex){ return hex+'22'; }
 const testList = document.getElementById('testList');
 Object.entries(tests).forEach(([key,t])=>{
   const div = document.createElement('div');
   div.className='test-card';
-  div.onclick = ()=>startTest(key);
-  div.innerHTML = `<div class="tc-ico" style="background:${tintBg(t.tint)};">${t.icon}</div><h4>${t.name}</h4><p>${t.desc}</p><div class="tc-go">Mula ujian <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div>`;
+  div.innerHTML = `<h4>${t.name}</h4><p class="muted">${t.desc}</p><button class="btn secondary" onclick="startTest('${key}')">Mula Ujian</button>`;
   testList.appendChild(div);
 });
-
-function updateProgress(key){
-  const t = tests[key];
-  const answered = t.items.filter((q,i)=>document.querySelector(`input[name="q${i}"]:checked`)).length;
-  const pct = Math.round(answered/t.items.length*100);
-  const fill = document.getElementById('progFill');
-  const txt = document.getElementById('progTxt');
-  if(fill){ fill.style.width = pct+'%'; txt.textContent = `${answered} / ${t.items.length} dijawab`; }
-}
 
 function startTest(key){
   const t = tests[key];
   const runner = document.getElementById('testRunner');
   runner.style.display='block';
-  let html = `<div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-      <div class="tc-ico" style="margin:0;width:42px;height:42px;font-size:1.25rem;background:${tintBg(t.tint)};">${t.icon}</div>
-      <h3 style="margin:0;">${t.name}</h3></div>
-    <div class="progress-wrap">
-      <div class="progress-top"><span id="progTxt">0 / ${t.items.length} dijawab</span><span>Skala 0–3</span></div>
-      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
-    </div>`;
+  let html = `<h3>${t.name}</h3>`;
   t.items.forEach((q,i)=>{
-    html += `<div class="question"><p class="qtext">${i+1}. ${q}</p><div class="answers">`;
-    t.options.forEach(o=>{ html += `<label class="ans"><input type="radio" name="q${i}" value="${o.v}" onchange="updateProgress('${key}')"><span class="radio"></span>${o.l}</label>`; });
-    html += `</div></div>`;
+    html += `<div class="question"><p class="qtext">${i+1}. ${q}</p>`;
+    t.options.forEach((o,oi)=>{
+      html += `<label class="opt"><input type="radio" name="q${i}" value="${o.v}"> ${o.l}</label>`;
+    });
+    html += `</div>`;
   });
-  html += `<button class="btn" style="margin-top:16px;" onclick="submitTest('${key}')">Lihat Keputusan
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-    </button><div id="testResultBox"></div>`;
+  html += `<button class="btn" onclick="submitTest('${key}')">Hantar Jawapan</button><div id="testResultBox"></div>`;
   runner.innerHTML = html;
   runner.scrollIntoView({behavior:'smooth'});
-}
-
-function gaugeSvg(pct, color){
-  const r=52, c=2*Math.PI*r, off=c*(1-pct/100);
-  return `<div class="gauge"><svg width="120" height="120" viewBox="0 0 120 120">
-    <circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--border)" stroke-width="11"/>
-    <circle cx="60" cy="60" r="${r}" fill="none" stroke="${color}" stroke-width="11" stroke-linecap="round"
-      stroke-dasharray="${c}" stroke-dashoffset="${c}" style="transition:stroke-dashoffset 1s cubic-bezier(.2,.7,.2,1);" id="gaugeArc"/>
-  </svg><div class="gval"><b id="gaugeNum">0</b><span>/ skor</span></div></div>`;
 }
 
 function submitTest(key){
@@ -498,175 +364,192 @@ function submitTest(key){
     let v = parseInt(sel.value,10);
     if(t.reversed && t.reversed.includes(i)) v = 3-v;
     total += v;
-    if(t.crisisItemIndex===i && parseInt(sel.value,10)>0) crisisFlag=true;
+    if(t.crisisItemIndex===i && v>0) crisisFlag=true;
   });
   if(!answeredAll){
-    const box = document.getElementById('testResultBox');
-    box.innerHTML = '<div class="result-box fade-up" style="background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 40%,transparent);"><p class="muted" style="margin:0;">Sila jawab semua soalan dahulu sebelum lihat keputusan.</p></div>';
-    box.scrollIntoView({behavior:'smooth'});
+    alert('Sila jawab semua soalan sebelum hantar.');
     return;
   }
-  const max = t.items.length*3;
-  const pct = Math.round(total/max*100);
   const r = t.interpret(total);
-  const col = r.level==='ok'?'var(--ok)':r.level==='warn'?'var(--warn)':'var(--danger)';
-  const bg = r.level==='ok'?'var(--ok-soft)':r.level==='warn'?'var(--warn-soft)':'var(--danger-soft)';
-  let html = `<div class="result-box fade-up" style="background:${bg};border-color:color-mix(in srgb,${col} 35%,transparent);">
-    <div class="gauge-wrap">
-      ${gaugeSvg(pct, col)}
-      <div class="result-meta">
-        <span class="badge ${r.level}">${r.label}</span>
-        <p style="margin:0;font-size:.9rem;">${r.text}</p>
-        <p class="muted" style="margin:8px 0 0;font-size:.78rem;">Skor: ${total} daripada ${max}</p>
-      </div>
-    </div>
+  let html = `<div class="result-box" style="background:${r.level==='ok'?'#e6efe8':r.level==='warn'?'#f3e6cf':'#f7e7e3'};">
+    <p>Skor anda: <strong>${total}</strong></p>
+    <p><span class="badge ${r.level}">${r.label}</span></p>
+    <p>${r.text}</p>
   </div>`;
   if(crisisFlag){
-    html += `<div class="crisis fade-up"><span style="font-size:1.2rem;">🚨</span><div>Anda menandakan fikiran untuk menyakiti diri. Sila hubungi <b>Talian Kasih 15999</b> atau <b>Befrienders KL 03-76272929</b> SEKARANG, atau berjumpa keluarga/pegawai kesihatan terdekat.</div></div>`;
+    html += `<div class="crisis">🚨 Anda menandakan fikiran untuk menyakiti diri. Sila hubungi <strong>Talian Kasih 15999</strong> atau <strong>Befrienders KL 03-76272929</strong> SEKARANG, atau berjumpa pegawai kesihatan/keluarga terdekat.</div>`;
   }
-  html += `<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-    <button class="btn secondary sm" onclick="goTo('edu')">Lihat Self-Care</button>
-    <button class="btn ghost sm" onclick="startTest('${key}')">Ulang Ujian</button>
-  </div>`;
-  const box = document.getElementById('testResultBox');
-  box.innerHTML = html;
-  // animate gauge
-  requestAnimationFrame(()=>{
-    const arc = document.getElementById('gaugeArc');
-    const c = 2*Math.PI*52;
-    arc.style.strokeDashoffset = c*(1-pct/100);
-    const num = document.getElementById('gaugeNum');
-    let cur=0; const step = Math.max(1, Math.round(total/25));
-    const iv = setInterval(()=>{ cur+=step; if(cur>=total){cur=total;clearInterval(iv);} num.textContent=cur; }, 30);
-  });
-  box.scrollIntoView({behavior:'smooth'});
+  html += `<p style="margin-top:10px;"><button class="btn secondary" onclick="goTo('edu')">Lihat Sumber Self-Care</button></p>`;
+  document.getElementById('testResultBox').innerHTML = html;
+  document.getElementById('testResultBox').scrollIntoView({behavior:'smooth'});
 }
 
 /* ---------- Journal ---------- */
 const MOOD_OPTIONS = [
-  {v:1,e:'😢',l:'Sgt sedih',c:'#ef4444'},
-  {v:2,e:'😟',l:'Sedih',c:'#f59e0b'},
-  {v:3,e:'😐',l:'Biasa',c:'#a3a3a3'},
-  {v:4,e:'🙂',l:'Baik',c:'#14b8a6'},
-  {v:5,e:'😄',l:'Sgt baik',c:'#10b981'},
+  {v:1,e:'😢',l:'Sangat sedih'},
+  {v:2,e:'😟',l:'Sedih'},
+  {v:3,e:'😐',l:'Biasa'},
+  {v:4,e:'🙂',l:'Baik'},
+  {v:5,e:'😄',l:'Sangat baik'},
 ];
 let selectedMood = null;
 const moodPicker = document.getElementById('moodPicker');
+moodPicker.setAttribute('role','radiogroup');
+moodPicker.setAttribute('aria-label','Pilih mood hari ini');
 MOOD_OPTIONS.forEach(m=>{
   const div = document.createElement('div');
   div.className='mood-emoji';
-  div.innerHTML = `<span class="em">${m.e}</span><span class="lb">${m.l}</span>`;
-  div.onclick = ()=>{ selectedMood=m.v; Array.from(moodPicker.children).forEach(c=>c.classList.remove('selected')); div.classList.add('selected'); };
+  div.tabIndex = 0;
+  div.setAttribute('role','radio');
+  div.setAttribute('aria-checked','false');
+  div.setAttribute('aria-label', m.l);
+  div.innerHTML = `${m.e}<br><span style="font-size:.72rem;">${m.l}</span>`;
+  const select = ()=>{
+    selectedMood = m.v;
+    Array.from(moodPicker.children).forEach(c=>{
+      c.classList.remove('selected');
+      c.setAttribute('aria-checked','false');
+    });
+    div.classList.add('selected');
+    div.setAttribute('aria-checked','true');
+  };
+  div.onclick = select;
+  div.onkeydown = (e)=>{
+    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); select(); }
+  };
   moodPicker.appendChild(div);
 });
 document.getElementById('journalDate').valueAsDate = new Date();
 
-function getJournal(){ return JSON.parse(localStorage.getItem('mindasihat_journal')||'[]'); }
-function setJournal(a){ localStorage.setItem('mindasihat_journal', JSON.stringify(a)); }
+function getJournal(){
+  return JSON.parse(localStorage.getItem('mindasihat_journal')||'[]');
+}
+function setJournal(arr){
+  localStorage.setItem('mindasihat_journal', JSON.stringify(arr));
+}
 function saveJournal(){
   const date = document.getElementById('journalDate').value;
   const note = document.getElementById('journalNote').value.trim();
   const msg = document.getElementById('journalSaveMsg');
-  if(!date || !selectedMood){ msg.textContent='⚠️ Sila pilih tarikh dan mood.'; return; }
+  if(!date || !selectedMood){
+    msg.textContent = 'Sila pilih tarikh dan mood.';
+    return;
+  }
   const arr = getJournal();
-  const existing = arr.findIndex(e=>e.date===date);
-  if(existing>=0) arr[existing]={date,mood:selectedMood,note}; else arr.push({date,mood:selectedMood,note});
-  arr.sort((a,b)=>a.date.localeCompare(b.date));
+  arr.push({date, mood:selectedMood, note});
+  arr.sort((a,b)=> a.date.localeCompare(b.date));
   setJournal(arr);
-  msg.textContent='✅ Entri disimpan!';
+  msg.textContent = 'Entri disimpan!';
   document.getElementById('journalNote').value='';
   renderJournal();
-  setTimeout(()=>msg.textContent='',2200);
+  setTimeout(()=>msg.textContent='',2000);
 }
-function deleteEntry(idx){ const a=getJournal(); a.splice(idx,1); setJournal(a); renderJournal(); }
+function deleteEntry(idx){
+  const arr = getJournal();
+  arr.splice(idx,1);
+  setJournal(arr);
+  renderJournal();
+}
 function renderJournal(){
   const arr = getJournal();
-  const wrap = document.getElementById('journalTableWrap');
-  if(arr.length===0){
-    wrap.innerHTML = '<div class="empty"><span class="big">🗒️</span>Belum ada entri. Mula rekod mood pertama anda!</div>';
-  } else {
-    let rows = arr.slice().reverse().map(e=>{
-      const idx = arr.indexOf(e);
-      const m = MOOD_OPTIONS.find(o=>o.v===e.mood);
-      return `<tr><td style="white-space:nowrap;">${e.date}</td><td style="font-size:1.3rem;">${m?m.e:''}</td><td>${e.note?e.note:'<span style="color:var(--faint);">—</span>'}</td><td style="text-align:right;"><button class="btn danger sm" onclick="deleteEntry(${idx})">Padam</button></td></tr>`;
-    }).join('');
-    wrap.innerHTML = `<table><thead><tr><th>Tarikh</th><th>Mood</th><th>Nota</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
-  }
+  const tbody = document.querySelector('#journalTable tbody');
+  tbody.innerHTML='';
+  arr.slice().reverse().forEach((e)=>{
+    const realIdx = arr.indexOf(e);
+    const tr = document.createElement('tr');
+    const moodObj = MOOD_OPTIONS.find(m=>m.v===e.mood);
+    tr.innerHTML = `<td>${e.date}</td><td>${moodObj?moodObj.e:''}</td><td>${e.note||''}</td><td><button class="btn danger" style="padding:3px 8px;font-size:.75rem;" onclick="deleteEntry(${realIdx})">Padam</button></td>`;
+    tbody.appendChild(tr);
+  });
   drawMoodChart(arr.slice(-14));
 }
-function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 function drawMoodChart(data){
   const canvas = document.getElementById('moodChart');
   const ctx = canvas.getContext('2d');
-  const w=canvas.width, h=canvas.height;
+  const w = canvas.width, h = canvas.height;
   ctx.clearRect(0,0,w,h);
-  const muted = cssVar('--faint')||'#9aa3bd';
-  const border = cssVar('--border')||'#e7eaf3';
   if(data.length===0){
-    ctx.fillStyle=muted; ctx.font='15px Inter, sans-serif'; ctx.textAlign='center';
-    ctx.fillText('Tiada data lagi — mula simpan entri jurnal anda.', w/2, h/2);
+    ctx.fillStyle='#9c9485'; ctx.font='14px sans-serif';
+    ctx.fillText('Tiada data lagi. Mula simpan entri jurnal anda.', 10, h/2);
     return;
   }
-  const padL=34, padR=20, padT=22, padB=34;
-  const stepX = (w-padL-padR)/Math.max(data.length-1,1);
-  const yFor = v => h-padB-((v-1)/4)*(h-padT-padB);
-  // grid
-  ctx.strokeStyle=border; ctx.lineWidth=1; ctx.font='11px Inter, sans-serif'; ctx.fillStyle=muted; ctx.textAlign='right';
-  for(let v=1;v<=5;v++){ const y=yFor(v); ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(w-padR,y); ctx.stroke(); }
-  // area gradient
-  const pts = data.map((e,i)=>({x:padL+i*stepX, y:yFor(e.mood)}));
-  const grad = ctx.createLinearGradient(0,padT,0,h-padB);
-  grad.addColorStop(0,'rgba(227,73,13,.4)'); grad.addColorStop(1,'rgba(227,73,13,0)');
-  ctx.beginPath(); ctx.moveTo(pts[0].x, h-padB);
-  pts.forEach(p=>ctx.lineTo(p.x,p.y));
-  ctx.lineTo(pts[pts.length-1].x, h-padB); ctx.closePath();
-  ctx.fillStyle=grad; ctx.fill();
-  // line
-  ctx.beginPath(); pts.forEach((p,i)=> i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));
-  ctx.strokeStyle='#e3490d'; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.stroke();
-  // dots
-  pts.forEach((p,i)=>{ const m=MOOD_OPTIONS.find(o=>o.v===data[i].mood);
-    ctx.beginPath(); ctx.arc(p.x,p.y,4.5,0,Math.PI*2); ctx.fillStyle=cssVar('--card')||'#fff'; ctx.fill();
-    ctx.lineWidth=2.5; ctx.strokeStyle=m?m.c:'#6366f1'; ctx.stroke(); });
-  // x labels
-  ctx.fillStyle=muted; ctx.textAlign='center'; ctx.font='10px Inter, sans-serif';
-  data.forEach((e,i)=>{ if(data.length>8 && i%2) return; ctx.fillText(e.date.slice(5), padL+i*stepX, h-12); });
+  const pad=30;
+  const stepX = (w-2*pad)/Math.max(data.length-1,1);
+  ctx.strokeStyle='#e6e0d3';
+  ctx.beginPath();
+  for(let yv=1;yv<=5;yv++){
+    const y = h-pad-( (yv-1)/4 )*(h-2*pad);
+    ctx.moveTo(pad,y); ctx.lineTo(w-pad,y);
+  }
+  ctx.stroke();
+  ctx.strokeStyle='#3d6b5c'; ctx.lineWidth=2;
+  ctx.beginPath();
+  data.forEach((e,i)=>{
+    const x = pad+i*stepX;
+    const y = h-pad-((e.mood-1)/4)*(h-2*pad);
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  ctx.fillStyle='#3d6b5c';
+  data.forEach((e,i)=>{
+    const x = pad+i*stepX;
+    const y = h-pad-((e.mood-1)/4)*(h-2*pad);
+    ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
+  });
+  ctx.fillStyle='#736b5e'; ctx.font='10px sans-serif';
+  data.forEach((e,i)=>{
+    const x = pad+i*stepX;
+    ctx.fillText(e.date.slice(5), x-14, h-8);
+  });
 }
+renderJournal();
 
-/* ---------- Education ---------- */
+/* ---------- Education accordion ---------- */
 const eduTopics = [
-  {t:'😌 Pengurusan Tekanan', b:'Kenal pasti punca tekanan dan bahagikan masalah besar kepada langkah kecil. Luangkan masa rehat tetap, bersenam ringan 20–30 minit sehari, dan hadkan kafein. Cuba teknik "time-boxing" untuk mengurus tugasan supaya tidak terasa keterlaluan.'},
-  {t:'🌬️ Mengurus Kecemasan', b:'Gunakan teknik grounding 5-4-3-2-1 (5 benda dilihat, 4 didengar, 3 disentuh, 2 dihidu, 1 dirasa) untuk kembali ke masa kini. Hadkan pendedahan kepada berita/media sosial yang menambah risau. Pernafasan dalam membantu menenangkan sistem saraf.'},
-  {t:'🛏️ Higiene Tidur', b:'Tetapkan waktu tidur & bangun yang konsisten. Elakkan skrin 30–60 minit sebelum tidur. Jadikan bilik sejuk, gelap dan senyap. Elakkan kafein selepas tengah hari.'},
-  {t:'💬 Self-Compassion & Harga Diri', b:'Layan diri seperti anda melayan kawan baik — tanpa menghukum diri secara keterlaluan. Catat 3 kejayaan kecil setiap hari dalam jurnal mood. Elakkan membandingkan diri secara negatif di media sosial.'},
-  {t:'🧑‍⚕️ Bila Perlu Jumpa Profesional', b:'Jika perasaan tertekan berlarutan lebih 2 minggu, menjejaskan kerja/hubungan, atau ada fikiran menyakiti diri — segera berjumpa pegawai psikologi, kaunselor atau pegawai perubatan. Hubungi Talian Kasih 15999 atau Befrienders KL 03-76272929 untuk sokongan segera.'},
+  {title:'😌 Pengurusan Tekanan', body:'Kenal pasti punca tekanan anda dan bahagikan masalah besar kepada langkah kecil. Luangkan masa rehat yang tetap, bersenam ringan 20-30 minit sehari, dan elakkan kafein berlebihan. Cuba teknik "time-boxing" untuk mengurus tugasan supaya tidak terasa keterlaluan.'},
+  {title:'🌬️ Mengurus Kecemasan', body:'Gunakan teknik grounding 5-4-3-2-1 (kenal pasti 5 benda dilihat, 4 didengar, 3 disentuh, 2 dihidu, 1 dirasa) untuk kembali ke masa kini. Hadkan pendedahan kepada berita/media sosial yang menambah risau. Latihan pernafasan dalam membantu menenangkan sistem saraf.'},
+  {title:'🛏️ Higiene Tidur', body:'Tetapkan waktu tidur & bangun yang konsisten setiap hari. Elakkan skrin (telefon/laptop) 30-60 minit sebelum tidur. Jadikan bilik tidur sejuk, gelap dan senyap. Elakkan kafein selepas tengah hari.'},
+  {title:'💬 Self-Compassion &amp; Harga Diri', body:'Layan diri sendiri seperti anda melayan kawan baik — tanpa menghukum diri secara keterlaluan. Catat 3 kejayaan kecil setiap hari dalam jurnal mood anda. Elakkan membandingkan diri secara negatif dengan orang lain di media sosial.'},
+  {title:'🧑‍⚕️ Bila Perlu Jumpa Profesional', body:'Jika perasaan sedih/risau/tertekan berlarutan lebih 2 minggu, menjejaskan kerja/sekolah/hubungan, atau anda ada fikiran menyakiti diri — segera berjumpa pegawai psikologi, kaunselor atau pegawai perubatan. Di Malaysia, anda boleh hubungi Talian Kasih 15999 atau Befrienders KL 03-76272929 untuk sokongan segera.'},
 ];
 const accWrap = document.getElementById('accordionWrap');
-eduTopics.forEach(top=>{
+eduTopics.forEach(t=>{
   const item = document.createElement('div');
   item.className='accordion-item';
-  item.innerHTML = `<div class="accordion-head">${top.t}<span class="plus">+</span></div><div class="accordion-body"><p>${top.b}</p></div>`;
-  item.querySelector('.accordion-head').onclick = ()=>item.classList.toggle('open');
+  item.innerHTML = `<div class="accordion-head" tabindex="0" role="button" aria-expanded="false">${t.title}<span>+</span></div><div class="accordion-body"><p>${t.body}</p></div>`;
+  const head = item.querySelector('.accordion-head');
+  const toggle = ()=>{
+    const open = item.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  head.onclick = toggle;
+  head.onkeydown = (e)=>{
+    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
+  };
   accWrap.appendChild(item);
 });
 
-/* ---------- Breathing ---------- */
+/* ---------- Breathing exercise ---------- */
 let breathing=false;
 function startBreathing(){
-  if(breathing) return; breathing=true;
+  if(breathing) return;
+  breathing=true;
   const circle = document.getElementById('breathCircle');
-  let cycle=0; const total=5;
+  let cycle=0;
+  const totalCycles=5;
   function step(){
-    if(cycle>=total){ circle.textContent='Selesai 🌟'; circle.style.transform='scale(.62)'; breathing=false; return; }
-    circle.textContent='Tarik Nafas'; circle.style.transition='transform 4s ease-in-out'; circle.style.transform='scale(1.08)';
-    setTimeout(()=>{ circle.textContent='Tahan';
-      setTimeout(()=>{ circle.textContent='Lepas Nafas'; circle.style.transition='transform 6s ease-in-out'; circle.style.transform='scale(.62)';
-        setTimeout(()=>{ cycle++; step(); }, 6000); }, 4000); }, 4000);
+    if(cycle>=totalCycles){ circle.textContent='Selesai'; circle.style.transform='scale(.7)'; breathing=false; return; }
+    circle.textContent='Tarik Nafas'; circle.style.transition='transform 4s ease-in-out'; circle.style.transform='scale(1.15)';
+    setTimeout(()=>{
+      circle.textContent='Tahan';
+      setTimeout(()=>{
+        circle.textContent='Lepas Nafas'; circle.style.transition='transform 6s ease-in-out'; circle.style.transform='scale(.7)';
+        setTimeout(()=>{ cycle++; step(); }, 6000);
+      }, 4000);
+    }, 4000);
   }
   step();
 }
-
-renderJournal();
 </script>
 </body>
 </html>
